@@ -2,22 +2,32 @@ import random
 
 word_list =["ardvark","baboon","camel"]
 
-choosen_word = ""
+display= []
+counter = 0
 
 # letter = input("guess a letter : ")
 
 chosen_word = random.choice(word_list)
 print(f"Psst, The choosen Word is {chosen_word}.")
 
-guess = input("Insert a letter to guess: ").lower()
+for letter in chosen_word:
+    display += "_"
+print(display)
 
-for i in chosen_word:
-    if i == guess:
-        choosen_word += i
-    else:
-        choosen_word += " _ "
-choosen_word.split()
-print(choosen_word)
+
+while ("_" in display):
+    guess = input("Guess a Letter: ").lower()
+    for position in range(len(chosen_word)):
+        letter = chosen_word[position]
+        # print(f"Current position: {position}\nCurrent letter: {letter}\nGuessed letter: {guess}")
+        if letter == guess:
+            display[position] = letter
+    print(display)
+print("You win!!!")
+    
+    
+
+    
 #     if i != guess:
 #         choosen_word.insert(i.index(i),"_")
 #     else:
