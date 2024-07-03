@@ -34,7 +34,7 @@ def Bid_Winner():
 
 while not_end_of_bid == True:
     Biddername = input("What is Your Name?: ")
-    BiddingAmount = int(input("What is Your bid?: "))
+    BiddingAmount = int(input("What is Your bid?: $"))
     others = input("Are there any other bidders? Type 'yes' or 'no'. ").lower()
 
     if others == 'no':
