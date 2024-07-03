@@ -4,4 +4,33 @@ programming_dictionary = {
     "loop":"The action of doing sommething over and over again"
 }
 
+
+
 print(programming_dictionary)
+
+#Nesting Starts ffrom here 
+
+capitals = {
+    "France":"Paris",
+    "Germeny":"Berlin"
+}
+
+#Nesting Lists inside a dictionary 
+
+travel_log = {
+    "France":{"cities_visited":["Paris","Lille","Dijon"],"total_visits":12},
+    "Gremany":{"cities_visited":["Berlin","Hamburg","Stuttgrat"],"total_visits":5}
+}
+
+#Nesting Dictionaries insde lists 
+
+travel_log = [
+    {
+        "Country":"France",
+        "cities_visited":["Paris","Lille","Dijon"],
+        "total_visits":12},
+    {
+        "Country":"Gremany",
+        "cities_visited":["Berlin","Hamburg","Stuttgrat"],
+        "total_visits":5}
+]
