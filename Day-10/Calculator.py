@@ -1,5 +1,9 @@
 from art import logo
+import os
 print(logo)
+
+def clear():
+    os.system('cls')
 
 def add(n1,n2):
     """Returns the Sum of Two Numbers provided in the parameters"""
@@ -24,19 +28,28 @@ operations = {
     '/':division
 }
 
-num1 = int(input("What is the first Number?: "))
-for keys in operations:
-    print(keys)
-operation_symbol = input("Pick an operaton from the line above: ")
-num2 = int(input("What is the second Number?: "))
+def calculator():
+    """THis function is used to calculate and handle the calculation logic"""
 
-first_answer = operations[operation_symbol](num1,num2)
+    num1 = float(input("What is the first Number?: "))
+    for keys in operations:
+        print(keys)
+    end_of_calculation = False
 
-print(f"{num1} {operation_symbol} {num2} = {first_answer}")
+        
 
-operation_symbol = input("Pick another operation: ")
-num3 = int(input("What's the next Number?: "))
-calculation_function= operations[operation_symbol]
-second_answer = calculation_function(calculation_function(num1,num2),num3)
+    while not end_of_calculation: 
+        operation_symbol = input("Pick an operaton from the line above: ")
+        num2 = float(input("What is the other Number?: "))
+        first_answer = operations[operation_symbol](num1,num2)
+        
+        print(f"{num1} {operation_symbol} {num2} = {first_answer}")
+        
+        if input(f"Type 'y to continue calculating with {first_answer}, or Type 'n' to start a new calculation : ")=='y':
+            num1 = first_answer
+        else:
+            end_of_calculation = True
+            clear()
+            calculator()
 
-print(f"{first_answer} {operation_symbol} {num3} = {second_answer}")
+calculator()
