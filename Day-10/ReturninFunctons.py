@@ -1,4 +1,5 @@
 def FormatName(fname,lname):
+    """Returns a Capitalized Full name for title"""
     if fname == "" or lname == "":
         return "You didnt provide valid input"
     
