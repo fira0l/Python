@@ -1,4 +1,7 @@
 def FormatName(fname,lname):
+    if fname == "" or lname == "":
+        return "You didnt provide valid input"
+    
     f_name = fname
     l_name = lname
     
