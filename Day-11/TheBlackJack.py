@@ -32,3 +32,31 @@
 
 #Hint 4: Create a deal_card() function that uses the List below to *return* a random card.
 #11 is the Ace.
+
+from arts import logo
+import random
+print(logo)
+
+
+player = input("Do u want to play a game of blackjack, type 'y' for yes and 'n' for no: ")
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+player_choosen_card = []
+def draw_cards():
+    current_score = 0
+    choosen = random.choice(cards)
+    for i in range(2):
+       player_choosen_card.append(choosen)
+    # print(player_choosen_card)
+    for card in player_choosen_card:
+        current_score += card
+    print(f"Your Card's: {player_choosen_card}, Current Score: {current_score}")
+    
+    computer_card = random.choice(cards)
+    print(f"Computer's first card: {computer_card}")
+
+# def win_logic():
+    # drawn_card = draw_cards()
+    # print(drawn_card)
+draw_cards()
+# win_logic()
