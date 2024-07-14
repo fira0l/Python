@@ -1,0 +1,14 @@
+request difficulty from the user 
+accept a number from a user 
+compare the accepted no with the generated number
+if number equal with the generated no 
+    if it is yes 
+        print(you won)
+    else
+        if higher
+            print(too high)
+        else 
+            print(too low)
+        else
+            print(You won)
+        
