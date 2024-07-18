@@ -18,6 +18,7 @@
 # elif year >= 1994:
 #     print("You are a Gen Z.")
 
+
 #Fix the errors
 age = int(input("How old are You? "))
 if age >18:
