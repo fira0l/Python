@@ -19,7 +19,16 @@
 #     print("You are a Gen Z.")
 
 
-#Fix the errors
-age = int(input("How old are You? "))
-if age >18:
-    print(f"You can Drive at the age {age}")
+# #Fix the errors
+# age = int(input("How old are You? "))
+# if age >18:
+#     print(f"You can Drive at the age {age}")
+
+#print is Your Friend
+
+pages = 0
+word_per_page = 0 
+pages = int(input("NUmber of Pages: "))
+word_per_page = int(input("Number of Words per page: "))
+total_words = pages * word_per_page
+print(total_words)
