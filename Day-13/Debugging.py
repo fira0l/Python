@@ -24,11 +24,22 @@
 # if age >18:
 #     print(f"You can Drive at the age {age}")
 
-#print is Your Friend
+# #print is Your Friend
 
-pages = 0
-word_per_page = 0 
-pages = int(input("NUmber of Pages: "))
-word_per_page = int(input("Number of Words per page: "))
-total_words = pages * word_per_page
-print(total_words)
+# pages = 0
+# word_per_page = 0 
+# pages = int(input("NUmber of Pages: "))
+# word_per_page = int(input("Number of Words per page: "))
+# total_words = pages * word_per_page
+# print(total_words)
+
+#use a debugger
+
+def mutate(a_list):
+    b_list =[]
+    for item in a_list:
+        new_item = item * 2
+        b_list.append(new_item)
+    print(b_list)
+
+mutate([1,2,3,5,8,13])
