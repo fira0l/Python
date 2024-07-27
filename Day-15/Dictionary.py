@@ -30,6 +30,8 @@ resources = {
     "coffee": 100,
 }
 
+profit = 0
+
 Money = {
     "quarter" : 0.25,
     "dime" : 0.1,
