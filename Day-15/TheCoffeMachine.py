@@ -1,4 +1,4 @@
-from Dictionary import MENU,resources
+from Dictionary import MENU,resources,Money
 
 is_off = False
 
@@ -17,42 +17,68 @@ def Report():
     print(f"Coffee: {coffee}g")
     # print(f"Coffee: ${MENU[users_choice]["cost"]}")
 
+def transactionHandler():
+    total = 0
+    usersPayment = {}
+    for keys in Money:
+        usersPayment[keys] = float(input(f"How Many {keys} want to insert."))
+        # users_choice.update()
+    # print(users_choice)
+    for keys in usersPayment:
+        usersPayment[keys] *= Money[keys]
+        total += usersPayment[keys]
+    return total
+   
+
 def Users_order_handler(user_choice):
     item = MENU[user_choice]["ingredients"]
+    payment = transactionHandler()
     if user_choice == "latte" or user_choice == "cappuccino":
-        for keys in MENU[user_choice]["ingredients"]:
-            if int(item[keys]) <= resources[keys]:
-                water = int(resources["water"])- int(MENU[user_choice]["ingredients"]["water"])
-                coffee = int(resources["coffee"])- int(MENU[users_choice]["ingredients"]["coffee"])
-                milk = int(resources["milk"]) - int(MENU[user_choice]["ingredients"]["milk"])
-                cost = MENU[user_choice]["cost"]
-            else:
-                print(f"Sorry there is not enough {keys}.")
-        resources["water"] = water
-        resources["coffee"] = coffee
-        resources["milk"] = milk
+        payment
+        if payment >= MENU[user_choice]["cost"]:
+            for keys in MENU[user_choice]["ingredients"]:
+                if int(item[keys]) <= resources[keys]:
+                    water = int(resources["water"])- int(MENU[user_choice]["ingredients"]["water"])
+                    coffee = int(resources["coffee"])- int(MENU[users_choice]["ingredients"]["coffee"])
+                    milk = int(resources["milk"]) - int(MENU[user_choice]["ingredients"]["milk"])
+                    cost = MENU[user_choice]["cost"]
+                else:
+                    print(f"Sorry there is not enough {keys}.")
+            resources["water"] = water
+            resources["coffee"] = coffee
+            resources["milk"] = milk
+            
+            print(f"water: {water} ml")        
+            print(f"coffee: {coffee}g")
+            print(f"milk: {milk}ml")
+            print(f"cost: ${cost}")
         
-        print(f"water: {water}")        
-        print(f"coffee: {coffee}")
-        print(f"milk: {milk}")
-        print(f"cost: {cost}")   
+        else:
+            print("You Don't Have Enough Money. Your Money Has been Refunded. Thank You")            
+        
+           
             
     elif user_choice == "espresso":
-        for keys in MENU[user_choice]["ingredients"]:
-            if int(item[keys]) <= resources[keys]:
-                water = int(resources["water"])- int(MENU[user_choice]["ingredients"]["water"])
-                coffee = int(resources["coffee"])- int(MENU[users_choice]["ingredients"]["coffee"])
-                cost = MENU[user_choice]["cost"]
-            else:
-                print(f"Sorry there is not enough {keys}.")
-                
-        resources["water"] = water
-        resources["coffee"] = coffee
-        resources["milk"] = milk
-                
-        print(f"water: {water}")        
-        print(f"coffee: {coffee}")
-        print(f"Cost: {cost}")
+        if payment >= MENU[user_choice]["cost"]:
+            for keys in MENU[user_choice]["ingredients"]:
+                if int(item[keys]) <= resources[keys]:
+                    water = int(resources["water"])- int(MENU[user_choice]["ingredients"]["water"])
+                    coffee = int(resources["coffee"])- int(MENU[users_choice]["ingredients"]["coffee"])
+                    cost = MENU[user_choice]["cost"]
+                else:
+                    print(f"Sorry there is not enough {keys}.")
+            resources["water"] = water
+            resources["coffee"] = coffee
+            # resources["milk"] = milk
+            change = payment - cost
+            print(f"water: {water}ml")        
+            print(f"coffee: {coffee}g")
+            print(f"Cost: ${cost}")
+            # print(f"Change : {change}")
+        else:
+            print("You Don't Have Enough Money. Your Money Has been Refunded. Thank You")
+       
+        
     else:
         print(f"We Dont Have {user_choice} Here in this Coffee Shop!!!")
 #Prompt a user for a choice
