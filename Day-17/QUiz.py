@@ -13,6 +13,7 @@ quiz = QuizBrain(question_bank)
 
 while quiz.still_has_question():
     quiz.next_question()
+    print("\n")
 
 #     for keys in questions:
 #         question = Question(keys,questions[keys])
