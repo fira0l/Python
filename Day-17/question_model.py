@@ -4,5 +4,5 @@ class Question:
         self.answer = q_answer
 
 
-new_q = Question("asdsd","False")
+
 
