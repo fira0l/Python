@@ -25,6 +25,7 @@ def clear():
     tim.penup()
     tim.setpos(0,0)
     tim.setheading(0)
+    tim.pendown()
 
 screen.listen()
 screen.onkey(key="w", fun=move_forward)
