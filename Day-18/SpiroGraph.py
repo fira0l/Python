@@ -1,15 +1,13 @@
+import random
 from turtle import Turtle, Screen
 import turtle as t
-import random
 
-tim = t.Turtle()
+
+tim = Turtle()
 t.colormode(255)
-
-tim.pensize(15)
 tim.speed("fastest")
 
-
-def random_color():
+def randomcolor():
     r = random.randint(0, 255)
     g = random.randint(0, 255)
     b = random.randint(0, 255)
@@ -20,11 +18,14 @@ def random_color():
 
 directions = [0, 90, 180, 270]
 
-for _ in range(200):
-    tim.color(random_color())
-    tim.forward(50)
-    tim.setheading(random.choice(directions))
+
+for direction in range(1000):
+    tim.color(randomcolor())
+    tim.circle(100)
+    tim.setheading(direction)
+    # if abs(t.pos()) < 1:
+    #     break
+
 
 screen = Screen()
-screen.title("Random Walk")
 screen.exitonclick()
