@@ -36,6 +36,7 @@ while game_is_on:
     # Detect Collision with Food
     if snake.head.distance(food) < 15:
         food.refresh()
+        snake.extend()
         score.increase_score()
 
     # Detect Collision with wall
