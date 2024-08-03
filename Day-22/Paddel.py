@@ -1,17 +1,14 @@
 from turtle import Turtle
-from typing import Tuple
 
 
 class Paddle(Turtle):
 
-    def __init__(self, X_POSITION, Y_POSITION):
-        self.paddle_side = (X_POSITION,Y_POSITION)
+    def __init__(self, xposition, yposition):
         super().__init__(shape="square")
         self.shapesize(stretch_wid=5,stretch_len=1)
         self.color("white")
-        self.segments = []
         self.penup()
-        self.goto(self.paddle_side)
+        self.goto(xposition, yposition)
 
     def up(self):
         new_y = self.ycor() + 20
