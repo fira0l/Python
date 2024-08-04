@@ -41,3 +41,5 @@ class CarManager:
             # self.new_y = self.ycor()
             # self.goto(self.new_x,self.new_y)
 
+    def leve_up(self):
+        self.car_speed += MOVE_INCREMENT
