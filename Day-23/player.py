@@ -14,12 +14,9 @@ class Player(Turtle):
         self.setheading(90)
         self.goto(STARTING_POSITION)
 
-
+    # Move The Turtle across the screen
 
     def move_up(self):
         self.forward(MOVE_DISTANCE)
-
-    def move_down(self):
-        self.backward(MOVE_DISTANCE)
 
 

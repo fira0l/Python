@@ -13,10 +13,10 @@ screen.tracer(0)
 
 # Create The Turtle
 player = Player()
+car = CarManager()
 
 screen.listen()
 screen.onkey(key="Up", fun=player.move_up)
-screen.onkey(key="Down", fun=player.move_down)
 
 
 game_is_on = True
@@ -25,8 +25,8 @@ while game_is_on:
     screen.update()
 
 
-# Move The Turtle across the screen
-# create Cars
+
+
 # Move Cars along the Screen
 # Detect Collision with cars
 # Detect When The Turtle passes the End-line
