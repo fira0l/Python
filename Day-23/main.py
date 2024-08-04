@@ -14,6 +14,11 @@ screen.tracer(0)
 # Create The Turtle
 player = Player()
 
+screen.listen()
+screen.onkey(key="Up", fun=player.move_up)
+screen.onkey(key="Down", fun=player.move_down)
+
+
 game_is_on = True
 while game_is_on:
     time.sleep(0.1)
