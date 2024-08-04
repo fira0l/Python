@@ -15,6 +15,7 @@ screen.tracer(0)
 # Create The Turtle
 player = Player()
 car = CarManager()
+score = Scoreboard()
 
 # yposition = []
 # for i in range(-280, 280, 10):
@@ -35,6 +36,17 @@ while game_is_on:
     car.create_car()
     car.move_car()
 
+    for car in car.all_cars:
+        if car.distance(player) < 20:
+            game_is_on = False
+            score.game_over()
+
+    if player.is_at_finish_line():
+        player.go_to_start()
+        car.leve_up()
+        score.increase_level()
+
+screen.exitonclick()
 
 # Move Cars along the Screen
 # Detect Collision with cars
