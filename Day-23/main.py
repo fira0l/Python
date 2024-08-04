@@ -21,3 +21,4 @@ while game_is_on:
 # Move Cars along the Screen
 # Detect Collision with cars
 # Detect When The Turtle passes the End-line
+# speed-up the cars every success-full cross
