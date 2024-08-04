@@ -33,7 +33,22 @@ Here are some of the key projects included in this repository:
 4. **Project 4: Black Jack**
    - A Python Game Called BlackJack Text version it is also enjoyable and etc
    - other programs are available into this repositor
-     
+5. **Project 5: The snake Game** 
+   - A Python snake game made with Turtle graphics package
+   - it is enjoyable and fun 😁 tastic game
+6. **Project 6: Capstone Project Called Crossing The Turtle**
+   - This is also A turtle graphics package made game that is focused on crossing a turtle across the screen safely
+7. **Project 7: The Pong Game**
+   - A two Player Game called Pong which is ideally the same as Arcades Pong game and it is awesome
+8. **Project 8: A Quiz App**
+   - A Python program that allows users to test their general knowledge skill about computer's. for the future can also 
+      Modified to other knowledge sectors 
+9. **Project 9: A Coffe Making Machine**
+   - A Coffe Making Machine based on the real coffe maker 
+10. **Project 10: An Upper or Lower Guessing Game**
+    - This projects is based on a instagram follows of celebrities and companies that allows users to guess which has more
+       followers than the other enjoy playing it
+
 ## Getting Started
 
 To get started with these projects, you'll need to clone the repository and install the necessary dependencies. Follow the instructions below.
