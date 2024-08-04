@@ -1,3 +1,4 @@
+import random
 import time
 from turtle import Screen
 from player import Player
@@ -15,6 +16,13 @@ screen.tracer(0)
 player = Player()
 car = CarManager()
 
+# yposition = []
+# for i in range(-280, 280, 10):
+#     yposition.append(i)
+# print(yposition)
+
+# car = CarManager(yposition)
+
 screen.listen()
 screen.onkey(key="Up", fun=player.move_up)
 
@@ -24,7 +32,8 @@ while game_is_on:
     time.sleep(0.1)
     screen.update()
 
-
+    car.create_car()
+    car.move_car()
 
 
 # Move Cars along the Screen
