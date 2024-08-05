@@ -11,3 +11,4 @@ with open("./weather-data.csv") as data_file:
             tempratures.append(int(row[1]))
 
 print(tempratures)
+
