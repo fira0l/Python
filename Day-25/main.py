@@ -12,3 +12,9 @@ with open("./weather-data.csv") as data_file:
 
 print(tempratures)
 
+import pandas
+
+data = pandas.read_csv("weather-data.csv")
+print(data)
+
+print(data["temp"])
