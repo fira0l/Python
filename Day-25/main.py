@@ -53,12 +53,28 @@ import pandas
 #
 # print(celcius)
 
-data_dict = {
-    "students": ["Amy", "James", "Angela"],
-    "scores": [76, 56, 65]
+# data_dict = {
+#     "students": ["Amy", "James", "Angela"],
+#     "scores": [76, 56, 65]
+# }
+#
+# data = pandas.DataFrame(data_dict)
+# print(data)
+#
+# data.to_csv("new_data.csv")
+
+data = pandas.read_csv("Squirrel-Data.csv")
+primary_fur_color = data["Primary Fur Color"]
+array_for_fur_data = primary_fur_color.tolist()
+
+Gray = array_for_fur_data.count("Gray")
+Cinnamon = array_for_fur_data.count("Cinnamon")
+Black = array_for_fur_data.count("Black")
+
+data_for_fur = {
+    "Fur_color": ["Gray", "Cinnamon", "Black"],
+    "count": [Gray, Cinnamon, Black]
 }
 
-data = pandas.DataFrame(data_dict)
-print(data)
-
-data.to_csv("new_data.csv")
+to_csv_data = pandas.DataFrame(data_for_fur)
+to_csv_data.to_csv("Generated Data")
