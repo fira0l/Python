@@ -9,5 +9,5 @@ weather_c = {
 }
 
 
-weather_f = {days: degree * 9/5 +32 for (days,degree) in weather_c.items()}
+weather_f = {days: (degree * 9/5) +32 for (days,degree) in weather_c.items()}
 print(weather_f)
