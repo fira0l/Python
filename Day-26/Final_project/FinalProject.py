@@ -25,7 +25,7 @@ import pandas
 
 nato_data = pandas.read_csv("nato_phonetic_alphabet.csv")
 
-nato_data_dict = {row.letter: row.code for (index,row) in nato_data.iterrows()}
+nato_data_dict = {row.letter: row.code for (index, row) in nato_data.iterrows()}
 print(nato_data_dict)
 # for (index,row) in
 
