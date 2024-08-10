@@ -13,3 +13,5 @@ names = ["Alex", "Beth", "Firaol", "Dave", "Eleanor", "Freda"]
 
 short_Names = [name for name in names if len(name) < 5]
 print(short_Names)
+upper_Names = [name.upper() for name in names if len(name) > 4]
+print(upper_Names)
