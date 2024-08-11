@@ -1,29 +1,28 @@
 from tkinter import *
-
-window = Tk()
-
-window.title("My First GUI Program")
-window.minsize(width=500,height=300)
-
-# Label
-
-my_label = Label(text="I am A Label", font=("Ariel", 25, "bold"))
-my_label.pack()
-
-my_label["text"] = "New Text"
-my_label.config(text="New Text")
-
 def button_clicked():
     inputed_text = input.get()
     my_label.config(text=f"{inputed_text}!!!")
 
+
+window = Tk()
+window.title("My First GUI Program")
+window.minsize(width=500,height=300)
+
+
+# Label
+my_label = Label(text="I am A Label", font=("Ariel", 25, "bold"))
+my_label["text"] = "New Text"
+my_label.config(text="New Text")
+my_label.grid(column=0, row=0)
+
+# Button
 button = Button(text="Click Me", command=button_clicked)
-button.pack()
+button.grid(column=1, row=1)
 
 #Entry: it is input
-
 input = Entry()
-input.pack()
+print(input.get())
+input.grid(column=1,row=2)
 
 
 
