@@ -6,8 +6,8 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 1
-SHORT_BREAK_MIN = 5
+WORK_MIN = 0.2
+SHORT_BREAK_MIN = 0.1
 LONG_BREAK_MIN = 20
 reps = 0
 
@@ -34,6 +34,7 @@ def start_timer():
         label.config(text="Work Time", fg=GREEN)
 
 
+
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
 
@@ -47,6 +48,11 @@ def count_down(count):
         window.after(1000, count_down, count - 1)
     else:
         start_timer()
+        marks = ""
+        work_sessions = math.floor(reps/2)
+        for _ in range(work_sessions):
+            marks += "✔️"
+        check_mark_label.config(text=marks)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -68,7 +74,7 @@ start_button = Button(text="Start", command=start_timer)
 start_button.config(fg="blue", highlightthickness=0)
 start_button.grid(column=0, row=2)
 
-check_mark_label = Label(text="✔️")
+check_mark_label = Label()
 check_mark_label.config(bg=YELLOW, highlightthickness=0, fg=GREEN)
 check_mark_label.grid(column=1,row=3)
 
