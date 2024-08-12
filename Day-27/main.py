@@ -22,8 +22,10 @@ button.grid(column=1, row=1)
 #Entry: it is input
 input = Entry()
 print(input.get())
-input.grid(column=1,row=2)
+input.grid(column=3,row=2)
 
+new_button = Button(text="New Button")
+new_button.grid(column=2, row=0)
 
 
 
