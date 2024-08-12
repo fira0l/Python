@@ -25,10 +25,13 @@ def start_timer():
 
     if reps % 8 == 0:
         count_down(long_break_sec)
+        label.config(text="Take A Long Break", fg=RED)
     elif reps % 2 == 0:
         count_down(short_break_sec)
+        label.config(text="Take A Short Break", fg=PINK)
     else:
         count_down(work_sec)
+        label.config(text="Work Time", fg=GREEN)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
