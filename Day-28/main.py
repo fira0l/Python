@@ -14,12 +14,15 @@ LONG_BREAK_MIN = 20
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
+def count_down(count):
+    window.after(1000, count_down, count - 1)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Pomodoro Technique")
 window.config(padx=100, pady=50, bg=YELLOW)
+count_down(5)
 
 label = Label(text="Timer", fg=GREEN, font=(FONT_NAME, 35, "bold"), bg=YELLOW, highlightthickness=0)
 label.grid(column=1, row=0)
