@@ -15,6 +15,7 @@ timer = None
 # ---------------------------- TIMER RESET ------------------------------- #
 
 def reset_timer():
+    """This Function used to Handle a reset for the Gui in which resets all to initial state"""
     window.after_cancel(timer)
     canvas.itemconfig(timer_text, text="00:00")
     label.config(text="Timer")
@@ -25,6 +26,7 @@ def reset_timer():
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
 def start_timer():
+    """This Function is used to Start a timer for the users"""
     global reps
     reps += 1
 
@@ -46,6 +48,7 @@ def start_timer():
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
+    """This Function is used to Handle The Countdown for each session"""
 
     count_minute = math.floor(count / 60)
     count_seconds = count % 60
