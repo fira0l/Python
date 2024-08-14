@@ -11,19 +11,19 @@ def save():
     email_username = email_input.get()
     password = password_input.get()
 
-    is_ok = messagebox.askokcancel(title="Website", message=f"These are the details entered: \nEmail: {email_username}"
-                           f"\nPassword: {password} \nIs it ok to save?")
-
     if len(website) == 0 or len(password) == 0:
         messagebox.showerror(title="Oops!!!", message="You Have left some Fields blank fill them first")
-    elif is_ok:
-        with open("data.txt", mode="a") as data:
-            data.writelines(f"{website} | {email_username} | {password}\n")
-        website_input.delete(0, END)
-        email_input.delete(0, END)
-        password_input.delete(0, END)
+    else:
+        is_ok = messagebox.askokcancel(title="Website", message=f"These are the details entered: \nEmail: {email_username}"
+                           f"\nPassword: {password} \nIs it ok to save?")
+        if is_ok:
+            with open("data.txt", mode="a") as data:
+                data.writelines(f"{website} | {email_username} | {password}\n")
+            website_input.delete(0, END)
+            email_input.delete(0, END)
+            password_input.delete(0, END)
 
-        email_input.insert(0, "example@gmail.com")
+            email_input.insert(0, "example@gmail.com")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
