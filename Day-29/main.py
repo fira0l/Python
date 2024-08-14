@@ -8,7 +8,7 @@ from tkinter import *
 
 window = Tk()
 window.title("Password Generator")
-window.config(padx=20, pady=20)
+window.config(padx=50, pady=50)
 
 lock_logo = PhotoImage(file="logo.png")
 canvas = Canvas()
@@ -38,14 +38,14 @@ email_input = Entry()
 email_input.config(width=35)
 email_input.grid(column=1, row=2, columnspan=2)
 
-password_input = Entry()
-password_input.config(width=21)
+password_input = Entry(width=21)
+# password_input.config()
 password_input.grid(column=1, row=3)
 
 # Button
 
 generate_button = Button(text="Generate Password")
-generate_button.config(width=14)
+# generate_button.config(width=14)
 generate_button.grid(column=2, row=3)
 
 add_button = Button(text="Add")
