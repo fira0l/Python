@@ -10,6 +10,12 @@ except FileNotFoundError:
 
 except KeyError as error_msg:
     print(f"the key {error_msg} Does not exist!!!")
+else:
+    content = file.read()
+    print(content)
+finally:
+    file.close()
+    print("File is closed")
 
 
 ## KeyError
