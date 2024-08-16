@@ -6,5 +6,9 @@
     "filecreated": {
         "email": "example@gmail.com",
         "password": "created"
+    },
+    "amazon": {
+        "email": "Amazon12@gmail.com",
+        "password": "Thisis amazonpassword"
     }
 }
