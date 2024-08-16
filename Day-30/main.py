@@ -14,8 +14,9 @@ else:
     content = file.read()
     print(content)
 finally:
-    file.close()
-    print("File is closed")
+    raise TypeError("This is an error i made")
+
+
 
 
 ## KeyError
