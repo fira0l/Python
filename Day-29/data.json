@@ -1,0 +1,10 @@
+{
+    "create": {
+        "email": "example@gmail.com",
+        "password": "create"
+    },
+    "filecreated": {
+        "email": "example@gmail.com",
+        "password": "created"
+    }
+}
