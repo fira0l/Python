@@ -48,6 +48,14 @@ Here are some of the key projects included in this repository:
 10. **Project 10: An Upper or Lower Guessing Game**
     - This projects is based on a instagram follows of celebrities and companies that allows users to guess which has more
        followers than the other enjoy playing it
+11. **Project 11: A Password Generator and saver**
+    - This is an Application that can generate a password for a website and stores it in JSON data then retrive it using 
+      search Functionality 
+12. **Project 12: A Flipcard for language learning Purposes**
+    - This applications purpose is to use a flip card to study a language initially it contains a french-english frequently
+     used word to teach for future it can be modified to teach multiple languages at a time
+
+
 
 ## Getting Started
 
