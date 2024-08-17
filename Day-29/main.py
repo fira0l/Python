@@ -67,15 +67,19 @@ def save():
 
 def search():
     users_search = website_input.get().lower()
-    with open("data.json", "r") as datafile:
-        data = json.load(datafile)
+    try:
+        with open("data.json", "r") as datafile:
+            data = json.load(datafile)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="Data file not found.")
+    else:
         try:
             email = data[users_search]["email"]
             password1 = data[users_search]["password"]
         except KeyError:
             messagebox.showinfo(title="Website Not Found", message="Website is not registered. register it first.")
         else:
-            messagebox.showinfo(f"Found Website:{users_search}",f"Email: {email}\nPassword: {password1}")
+                messagebox.showinfo(f"Found Website:{users_search}",f"Email: {email}\nPassword: {password1}")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
