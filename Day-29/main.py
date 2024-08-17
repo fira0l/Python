@@ -75,7 +75,7 @@ def search():
         except KeyError:
             messagebox.showinfo(title="Website Not Found", message="Website is not registered. register it first.")
         else:
-            messagebox.showinfo("Found Website",f"email: {email}\npassword: {password1}")
+            messagebox.showinfo("Found Website",f"Email: {email}\nPassword: {password1}")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
