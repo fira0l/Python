@@ -3,12 +3,18 @@ import pandas as pd
 import random
 
 BACKGROUND_COLOR = "#B1DDC6"
+current_card = {}
+to_learn = {}
 
-data = pd.read_csv("data/french_words.csv")
+try:
+    data = pd.read_csv("data/words_to_learn.csv")
+except FileNotFoundError:
+    original_data = pd.read_csv("data/french_words.csv")
+    to_learn = original_data.to_dict(orient="records")
 # print(data)
-to_learn = data.to_dict(orient="records")
+else:
+    to_learn = data.to_dict(orient="records")
 # print(to_learn)
-current_card={}
 
 
 def next_card():
@@ -27,6 +33,13 @@ def flip_card():
     canvas.itemconfig(card_background, image=card_back_img)
 
 
+def is_known():
+    to_learn.remove(current_card)
+    data1 = pd.DataFrame(to_learn)
+    data1.to_csv("data/Words_to_learn.csv", index=False)
+    next_card()
+
+
 window = Tk()
 window.title("LangCard")
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
@@ -38,7 +51,7 @@ card_front_img = PhotoImage(file="images/card_front.png")
 card_back_img = PhotoImage(file="images/card_back.png")
 card_background = canvas.create_image(400, 263, image=card_front_img)
 card_title = canvas.create_text(400, 150, text="", font=("Ariel", 40, "italic"))
-card_word = canvas.create_text(400, 263,text="", font=("Ariel", 60, "bold"))
+card_word = canvas.create_text(400, 263, text="", font=("Ariel", 60, "bold"))
 canvas.config(bg=BACKGROUND_COLOR)
 canvas.grid(row=0, column=0, columnspan=2)
 
@@ -47,7 +60,7 @@ unknown_button = Button(image=cross_image, highlightthickness=0, command=next_ca
 unknown_button.grid(row=1, column=0)
 
 check_image = PhotoImage(file="images/right.png")
-check_button = Button(image=check_image, highlightthickness=0, command=next_card)
+check_button = Button(image=check_image, highlightthickness=0, command=is_known)
 check_button.grid(row=1, column=1)
 
 
