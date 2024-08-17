@@ -10,5 +10,9 @@
     "amazon": {
         "email": "Amazon12@gmail.com",
         "password": "Thisis amazonpassword"
+    },
+    "facebook": {
+        "email": "example@gmail.com",
+        "password": "z+#4IALb00Z&TST5"
     }
 }

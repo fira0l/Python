@@ -67,12 +67,15 @@ def save():
 
 def search():
     users_search = website_input.get().lower()
-    with open("data.json","r") as datafile:
+    with open("data.json", "r") as datafile:
         data = json.load(datafile)
-        email = data[users_search]["email"]
-        password1 = data[users_search]["password"]
-
-        messagebox.showinfo("Found Website",f"email: {email}\npassword: {password1}")
+        try:
+            email = data[users_search]["email"]
+            password1 = data[users_search]["password"]
+        except KeyError:
+            messagebox.showinfo(title="Website Not Found", message="Website is not registered. register it first.")
+        else:
+            messagebox.showinfo("Found Website",f"email: {email}\npassword: {password1}")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -112,18 +115,18 @@ email_input.config(width=35)
 email_input.grid(column=1, row=2, columnspan=2)
 email_input.insert(0, "example@gmail.com")
 
-password_input = Entry(width=21)
+password_input = Entry(width=35)
 password_input.grid(column=1, row=3)
 
 # Button
 
 generate_button = Button(text="Generate Password", command=generate_password)
-generate_button.grid(column=2, row=3)
+generate_button.grid(column=3, row=3)
 
 add_button = Button(text="Add", command=save)
 add_button.config(width=36)
 add_button.grid(column=1, row=4, columnspan=2)
 
-search_button = Button(text="Search", command=search)
+search_button = Button(text="Search", command=search,width=14)
 search_button.grid(row=1,column=3)
 window.mainloop()
