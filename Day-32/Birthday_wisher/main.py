@@ -39,7 +39,7 @@ if it_is_birthday:
     with open(file=f"letter_templates/{letter}", mode="r") as letter:
         content = letter.read()
         content = content.replace("[NAME]", name)
-        # print(content)
+        print(content)
 
     with SMTP("smtp.gmail.com") as smtp:
         smtp.starttls()
