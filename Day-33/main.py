@@ -1,9 +1,12 @@
+import smtplib
+import time
 import requests
 from datetime import datetime as dt
 
 MY_LAT = 9.145000
 MY_LONG = 40.489674
-
+MY_EMAIL = "firaforpython@gmail.com"
+MY_PASSWORD = "odsfplyzjibggmof"
 
 def is_iss_overhead():
     response = requests.get(url="http://api.open-notify.org/iss-now.json")
@@ -42,8 +45,18 @@ def is_night():
     if time_now >= sunset or time_now <= sunrise:
         return True
 
-
-
+while True:
+    time.sleep(60)
+    if is_iss_overhead() and is_night():
+        connection = smtplib.SMTP("smtp.gmail.com")
+        connection.starttls()
+        connection.login(MY_EMAIL, MY_PASSWORD)
+        connection.send_message(
+            to_addrs="Firaolanbessa170@gmail.com",
+            from_addr=MY_EMAIL,
+            msg="Subject: Notifying u about the status of the ISS-Location status\n\nDear Fira, This is a notification for"
+                " u so that u look up to the sky and enjoy the view of ISS station"
+                                )
 
 
 
