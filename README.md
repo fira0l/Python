@@ -42,7 +42,8 @@ Here are some of the key projects included in this repository:
    - A two Player Game called Pong which is ideally the same as Arcades Pong game and it is awesome
 8. **Project 8: A Quiz App**
    - A Python program that allows users to test their general knowledge skill about computer's. for the future can also 
-      Modified to other knowledge sectors 
+      Modified to other knowledge sectors
+   - A GUI for the quiz app and made some arrangements that the quiz uses an API to access questions
 9. **Project 9: A Coffe Making Machine**
    - A Coffe Making Machine based on the real coffe maker 
 10. **Project 10: An Upper or Lower Guessing Game**
@@ -50,7 +51,8 @@ Here are some of the key projects included in this repository:
        followers than the other enjoy playing it
 11. **Project 11: A Password Generator and saver**
     - This is an Application that can generate a password for a website and stores it in JSON data then retrive it using 
-      search Functionality 
+      search Functionality
+    - It is developed using Simple and User Friendly GUI 
 12. **Project 12: A Flipcard for language learning Purposes**
     - This applications purpose is to use a flip card to study a language initially it contains a french-english frequently
      used word to teach for future it can be modified to teach multiple languages at a time
