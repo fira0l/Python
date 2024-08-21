@@ -4,7 +4,10 @@ from quiz_brain import QuizBrain
 
 THEME_COLOR = "#375362"
 
+
 class QuizInterface:
+
+
 
     def __init__(self, quiz_brain: QuizBrain):
         self.quiz = quiz_brain
@@ -26,11 +29,11 @@ class QuizInterface:
         self.canvas.grid(row=1, column=0, columnspan=2, pady=50)
 
         image = PhotoImage(file="images/true.png")
-        self.true_button = Button(image=image, highlightthickness=0)
+        self.true_button = Button(image=image, highlightthickness=0, command=self.true_pressed)
         self.true_button.grid(row=2, column=0)
 
         image2 = PhotoImage(file="images/false.png")
-        self.false_button = Button(image=image2, highlightthickness=0)
+        self.false_button = Button(image=image2, highlightthickness=0, command=self.false_pressed)
         self.false_button.grid(row=2, column=1)
 
         self.get_next_question()
@@ -41,3 +44,8 @@ class QuizInterface:
         q_text = self.quiz.next_question()
         self.canvas.itemconfig(self.question_text, text=q_text)
 
+    def true_pressed(self):
+        self.quiz.check_answer("True")
+
+    def false_pressed(self):
+        self.quiz.check_answer("False")
