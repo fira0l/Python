@@ -3,7 +3,7 @@ from twilio.rest import Client
 import os
 
 
-api_key = [API_KEY_FROM_OPEN_WEATHER]
+api_key = ["API_KEY_FROM_OPEN_WEATHER"]
 account_sid = os.environ.get("ACCOUNT_SID")
 auth_token = os.environ.get("AUTH_TOKEN")
 
