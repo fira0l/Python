@@ -23,7 +23,7 @@ print(yesterday_closing_data)
 
 
 day_before_yesterday = data_list[1]
-day_before_yesterday_closing_price = day_before_yesterday["4. closing"]
+day_before_yesterday_closing_price = day_before_yesterday["4. close"]
 print(day_before_yesterday_closing_price)
 
 
