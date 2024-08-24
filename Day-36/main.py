@@ -45,5 +45,11 @@ if diff_percent > 3:
     articles = news_response.json()["articles"]
     print(articles)
 
+    three_articles = articles[:3]
+    print(three_articles)
+
+
+
+
 
 
