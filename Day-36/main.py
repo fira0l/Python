@@ -1,6 +1,6 @@
 import requests
 from twilio.rest import Client
-from Access import *
+# from Access import *
 
 ACCOUNT_SID = ACCOUNT_SID
 AUTH_TOKEN = AUTH_TOKEN
