@@ -1,4 +1,6 @@
 import requests
+from datetime import datetime
+
 
 pixela_endpoint = "https://pixe.la/v1/users"
 USERNAME = "fira0l"
@@ -27,15 +29,18 @@ graph_conf = {
 headers = {
     "X-USER-TOKEN": TOKEN
 }
-#
+
 # response = requests.post(url=graph_endpoint, json=graph_conf, headers=headers)
 # print(response.text)
 
+today = datetime.now()
+print(today)
+
 pixel_data = {
-    "date": "20240824",
+    "date": today.strftime("%Y%m%d"),
     "quantity": "89.4"
 }
 
-response = requests.post(url=f"{graph_endpoint}/graph2", json=pixel_data, headers=headers)
-print(response.text)
+# response = requests.post(url=f"{graph_endpoint}/graph2", json=pixel_data, headers=headers)
+# print(response.text)
 
