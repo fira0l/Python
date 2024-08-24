@@ -38,9 +38,15 @@ print(today)
 
 pixel_data = {
     "date": today.strftime("%Y%m%d"),
-    "quantity": "89.4"
+    "quantity": input("How many Kilos are u today? ")
 }
-
+#
 # response = requests.post(url=f"{graph_endpoint}/graph2", json=pixel_data, headers=headers)
 # print(response.text)
 
+put_data = {
+    "quantity": "90.4"
+}
+
+response = requests.put(url=f"{graph_endpoint}/graph2/{today.strftime('%Y%m%d')}", json=put_data, headers=headers)
+print(response.text)
