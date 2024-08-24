@@ -1,4 +1,9 @@
 import requests
+from twilio.rest import Client
+from Access import *
+
+ACCOUNT_SID = ACCOUNT_SID
+AUTH_TOKEN = AUTH_TOKEN
 
 STOCK_NAME = "TSLA"
 COMPANY_NAME = "Tesla Inc"
@@ -47,6 +52,15 @@ if diff_percent > 3:
 
     three_articles = articles[:3]
     print(three_articles)
+    formatted_article = [f"Headline: {article['title']}. \nBrief: {article['description']}" for article in three_articles]
+
+    client = Client(ACCOUNT_SID, AUTH_TOKEN)
+    for article in formatted_article:
+        message = client.messages.create(
+            body=article,
+            from_= '+12088048774',
+            to='+251976104860'
+        )
 
 
 
