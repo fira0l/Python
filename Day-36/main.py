@@ -35,13 +35,19 @@ day_before_yesterday_closing_price = day_before_yesterday["4. close"]
 print(day_before_yesterday_closing_price)
 
 
-difference = abs(float(yesterday_closing_data) - float(day_before_yesterday_closing_price))
+difference = float(yesterday_closing_data) - float(day_before_yesterday_closing_price)
 print(difference)
 
-diff_percent = (difference / float(yesterday_closing_data)) * 100
+up_down = None
+if difference > 0:
+    up_down = "🔼"
+else:
+    up_down = "🔽"
+
+diff_percent = round((difference / float(yesterday_closing_data)) * 100)
 print(diff_percent)
 
-if diff_percent > 3:
+if abs(diff_percent) > 3:
     news_params = {
         "apiKey": NEWS_API_KEY,
         "qInTitle": COMPANY_NAME,
@@ -52,7 +58,7 @@ if diff_percent > 3:
 
     three_articles = articles[:3]
     print(three_articles)
-    formatted_article = [f"Headline: {article['title']}. \nBrief: {article['description']}" for article in three_articles]
+    formatted_article = [f"{STOCK_NAME}: {up_down}{diff_percent}%\nHeadline: {article['title']}. \nBrief: {article['description']}" for article in three_articles]
 
     client = Client(ACCOUNT_SID, AUTH_TOKEN)
     for article in formatted_article:
