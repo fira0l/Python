@@ -1,10 +1,11 @@
 from datetime import datetime
+import os
 
 import requests
 
 
-USER_SID = "NUTRITIONIX_SID"
-NUT_API_KEY = "NUTRITIONIX_API_KEY"
+USER_SID = os.environ.get("ACCOUNT_SID")
+NUT_API_KEY = os.environ.get("AUTH_KEY")
 HOST_DOMAIN = "https://trackapi.nutritionix.com"
 ENDPOINT = "/v2/natural/exercise"
 GOOGLE_SHEETS_URL = "https://api.sheety.co/adacce6626dffa15bf442c3d9acb17c4/workoutsData/workouts"
