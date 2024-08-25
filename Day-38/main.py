@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import requests
 
 
@@ -19,6 +21,10 @@ headers = {
     "x-app-key": NUT_API_KEY
 }
 
+g_header = {
+
+}
+
 parameters = {
     "query": user_query,
     "weight_kg": WEIGHT,
@@ -29,7 +35,31 @@ parameters = {
 
 response = requests.post(url=f"{HOST_DOMAIN}{ENDPOINT}", headers=headers, json=parameters)
 response.raise_for_status()
-result = response.json()["exercises"][0]["name"]
+result = response.json()["exercises"]
+today = datetime.now()
 print(result)
+for exercise in result:
+    result = exercise
+    EXERCISE_NAME = result["name"]
+    CALORIES = result["nf_calories"]
+    DURATION = result["duration_min"]
+    DATE = today.strftime("%d/%m/%Y")
+    TIME = today.strftime("%H:%M:%S")
+
+# print(DATE,TIME)
+    Sheets_body = {
+        "workout": {
+            "date": DATE,
+            "time": TIME,
+            "exercise": EXERCISE_NAME,
+            "duration": DURATION,
+            "calories": CALORIES
+        }
+    }
+    write_request = requests.post(url=GOOGLE_SHEETS_URL, json=Sheets_body)
+    write_request.raise_for_status()
+    print(write_request.text)
+
+
 
 
