@@ -26,4 +26,6 @@ parameters = {
 }
 
 response = requests.post(url=f"{HOST_DOMAIN}{ENDPOINT}", headers=headers, json=parameters)
-print(response.text)
+response.raise_for_status()
+result = response.json()
+print(result)
