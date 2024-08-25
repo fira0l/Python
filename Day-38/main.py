@@ -4,8 +4,14 @@ import requests
 USER_SID = "105f4e75"
 API_KEY = "f37315f4d36bc5d593199639e2a31426"
 HOST_DOMAIN = "https://trackapi.nutritionix.com"
-ENDPOINT = "/v2/natural/nutrients"
+ENDPOINT = "/v2/natural/exercise"
 
+
+WEIGHT = 87
+HEIGHT = 168.5
+AGE = 22
+
+user_query = input("What Kind of Exercise did u perform? ")
 
 headers = {
     "x-app-id": USER_SID,
@@ -13,7 +19,8 @@ headers = {
 }
 
 parameters = {
-    "query": None,
-
-
+    "query": user_query,
+    "weight_kg": WEIGHT,
+    "height_cm": HEIGHT,
+    "age": AGE
 }
