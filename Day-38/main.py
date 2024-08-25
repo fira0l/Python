@@ -1,8 +1,8 @@
 import requests
 
 
-USER_SID = "105f4e75"
-NUT_API_KEY = "f37315f4d36bc5d593199639e2a31426"
+USER_SID = "NUTRITIONIX_SID"
+NUT_API_KEY = "NUTRITIONIX_API_KEY"
 HOST_DOMAIN = "https://trackapi.nutritionix.com"
 ENDPOINT = "/v2/natural/exercise"
 GOOGLE_SHEETS_URL = "https://api.sheety.co/adacce6626dffa15bf442c3d9acb17c4/workoutsData/workouts"
