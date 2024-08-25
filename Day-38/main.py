@@ -24,3 +24,6 @@ parameters = {
     "height_cm": HEIGHT,
     "age": AGE
 }
+
+response = requests.post(url=f"{HOST_DOMAIN}{ENDPOINT}", headers=headers, json=parameters)
+print(response.text)
