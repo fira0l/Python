@@ -11,9 +11,9 @@ import os
 
 
 parameters = {
-    "originLocationCode": "SYD",
-    "destinationLocationCode": "BKK",
-    "departureDate": "2024-08-29",
+    "originLocationCode": "ADD",
+    "destinationLocationCode": "JIM",
+    "departureDate": "2024-09-11",
     "adults": 1
 }
 
@@ -24,19 +24,33 @@ access_header = {
     "Content-Type": "application/x-www-form-urlencoded"
 }
 
-access = {
-    "grant_type": "client_credentials",
-    "client_id": os.environ.get("AMADEUS_SID"),
-    "client_secret": os.environ.get("AMADEUS_KEY")
+authorization_header = {
+    "Authorization": f"Bearer {os.environ.get('AUTH_TOKEN')}"
 }
 
-access_token = requests.post(url="https://test.api.amadeus.com/v1/security/oauth2/token/", json=access, headers=access_header)
-access_token.raise_for_status()
-print(access_token.text)
-print(access_token.json())
+access = {
+    "grant_type": "client_credentials",
+    "client_id": os.environ.get("AMADEUS_KEY"),
+    "client_secret": os.environ.get("AMADEUS_SECRET")
+}
 
-# response = requests.get(url=amadeus_url, params=parameters, )
-# response.raise_for_status()
+
+param = {
+    "airline": "IB"
+}
 #
-# print(response.text)
+# response = requests.get(url="https://test.api.amadeus.com/v2/reference-data/urls/checkin-links", json=param, headers=authorization_header)
+# print(response.json())
+
+
+# access_token = requests.post(url="https://test.api.amadeus.com/v1/security/oauth2/token/", json=access, headers=access_header)
+# access_token.raise_for_status()
+# print(access_token.text)
+# print(access_token.json())
+
+response = requests.get(url=amadeus_url, params=parameters, headers=authorization_header)
+response.raise_for_status()
+#
+print(response.text)
+
 
