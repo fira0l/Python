@@ -10,8 +10,18 @@ soup = BeautifulSoup(yc_web_page, "html.parser")
 titles = soup.find(name="span", class_="titleline")
 # print(titles.getText())
 
-article_link = soup.find_all(name="a")
+articles = soup.find_all(name="a")
+article_texts = []
+article_link = []
 
+for article_tag in articles:
+    text = article_tag.getText()
+    article_texts.append(text)
+    link = article_tag.get("href")
+    article_link.append(link)
+
+print(article_texts)
+print(article_link)
 
 
 
