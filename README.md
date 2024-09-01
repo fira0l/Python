@@ -1,4 +1,7 @@
+
 # Python Training and Projects
+
+![](https://github.com/fira0l/Python/blob/main/gource_557de6c5-4d2c-4c30-9d28-8bad9b49c155.mp4)
 
 Welcome to Firaol Anbessa's Python Training and Projects repository! This repository contains a collection of Python training codes and projects developed by [Firaol Anbessa](https://github.com/fira0l).
 
