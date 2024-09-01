@@ -14,3 +14,6 @@ for tag in all_anchor_tags:
 
 heading = soup.find(name="h3", class_="heading")
 print(heading.get("class"))
+
+company_url = soup.select_one(selector="p a")
+print(company_url)
