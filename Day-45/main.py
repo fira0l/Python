@@ -48,7 +48,7 @@ for i in range(0,len(article_upvotes)-1):
         indexoflargest = i
 
 titleoflargest = article[indexoflargest]
-linkoflargest  = links[indexoflargest]
+linkoflargest = links[indexoflargest]
 
 print(titleoflargest)
 print(linkoflargest)
