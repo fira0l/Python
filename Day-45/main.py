@@ -10,18 +10,34 @@ soup = BeautifulSoup(yc_web_page, "html.parser")
 titles = soup.find(name="span", class_="titleline")
 # print(titles.getText())
 
-articles = soup.find_all(name="a")
-article_texts = []
-article_link = []
+links = []
+article = []
 
-for article_tag in articles:
-    text = article_tag.getText()
-    article_texts.append(text)
-    link = article_tag.get("href")
-    article_link.append(link)
+all_link = soup.select(selector="span.titleline a")
+for link in all_link:
+    title = link.getText()
+    article.append(title)
+    single_link = link.get("href")
+    links.append(single_link)
 
-print(article_texts)
-print(article_link)
+print(links)
+print(article)
+#
+# articles = soup.find_all(name="a")
+# article_texts = []
+# article_link = []
+#
+# for article_tag in articles:
+#     text = article_tag.getText()
+#     article_texts.append(text)
+#     link = article_tag.get("href")
+#     article_link.append(link)
+#
+article_upvotes = [score.getText() for score in soup.find_all(name="span", class_="score")]
+#
+# print(article_texts)
+# print(article_link)
+print(article_upvotes)
 
 
 
