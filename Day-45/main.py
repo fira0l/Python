@@ -39,6 +39,20 @@ article_upvotes = [int(score.getText().split()[0]) for score in soup.find_all(na
 # print(article_link)
 print(article_upvotes)
 
+largest = article_upvotes[0]
+indexoflargest = 0
+
+for i in range(0,len(article_upvotes)-1):
+    if article_upvotes[i] > largest:
+        largest = article_upvotes[i]
+        indexoflargest = i
+
+titleoflargest = article[indexoflargest]
+linkoflargest  = links[indexoflargest]
+
+print(titleoflargest)
+print(linkoflargest)
+print(article_upvotes[indexoflargest])
 
 
 
