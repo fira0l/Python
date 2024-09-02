@@ -42,7 +42,10 @@ songs = getsong(song_item)
 
 # print(songs)
 
-dataframe = pd.DataFrame(songs, columns=("rank","artist","title"))
+dataframe = pd.DataFrame(songs, columns=("rank", "artist", "title"))
 dataframe.columns = (["Rank", "Artist", "Title"])
 
-print(dataframe.to_string(index=False))
+# print(dataframe.to_string(index=False))
+
+title = [key["title"] for key in songs]
+print(title)
