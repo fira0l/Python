@@ -48,4 +48,6 @@ dataframe.columns = (["Rank", "Artist", "Title"])
 # print(dataframe.to_string(index=False))
 
 title = [key["title"] for key in songs]
+artist = [key["artist"] for key in songs]
+year = date.split("-")[0]
 print(title)

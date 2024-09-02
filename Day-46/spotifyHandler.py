@@ -14,17 +14,18 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
 ))
 
 user_id = sp.current_user()["id"]
-song_names = songs
+song_names = title
+year = year
 print(song_names)
 
 #
-# song_uris = []
+song_uris = []
 # year = date.split("-")[0]
-# for song in song_names:
-#     result = sp.search(q=f"track:{song} year:{year}", type="track")
-#     print(result)
-#     try:
-#         uri = result["tracks"]["items"][0]["uri"]
-#         song_uris.append(uri)
-#     except IndexError:
-#         print(f"{song} doesn't exist in Spotify. Skipped.")
+for song in song_names:
+    result = sp.search(q=f"track:{song} year:{year}", type="track")
+    print(result)
+    try:
+        uri = result["tracks"]["items"][0]["uri"]
+        song_uris.append(uri)
+    except IndexError:
+        print(f"{song} doesn't exist in Spotify. Skipped.")
