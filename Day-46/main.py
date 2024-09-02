@@ -1,5 +1,7 @@
 import requests
 from datetime import datetime
+import pandas as pd
+
 
 from bs4 import BeautifulSoup
 
@@ -25,17 +27,22 @@ soup = websitescraper(date)
 def getsong(row_items):
     extracted_songs = []
     for item in row_items:
-        score = item.find(name="span", class_="c-label").getText().strip()
+        rank = item.find(name="span", class_="c-label").getText().strip()
         title = item.find(name="h3", id="title-of-a-story").getText().strip()
         section = item.find(name="ul", class_="lrv-a-unstyle-list")
         artist = section.find(name="span", class_="c-label").getText().strip()
         extracted_songs.append({"title": title,
                                 "artist": artist,
-                                "score": score})
+                                "rank": rank})
     return extracted_songs
 
 
 song_item = soup.select(selector="ul.o-chart-results-list-row")
 songs = getsong(song_item)
 
-print(songs)
+# print(songs)
+
+dataframe = pd.DataFrame(songs, columns=("rank","artist","title"))
+dataframe.columns = (["Rank", "Artist", "Title"])
+
+print(dataframe.to_string(index=False))
