@@ -29,8 +29,6 @@ for song in song_names:
         song_uris.append(uri)
     except IndexError:
         print(f"{song} doesn't exist in Spotify. Skipped.")
-    else:
-        playlist = sp.user_playlist_create(user=user_id, name=f"{date} Billboard 100", public=False)
+playlist = sp.user_playlist_create(user=user_id, name=f"{date} Billboard 100", public=False)
         # print(playlist)
-
-        sp.playlist_add_items(playlist_id=playlist["id"], items=song_uris)
+sp.playlist_add_items(playlist_id=playlist["id"], items=song_uris)
