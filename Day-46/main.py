@@ -50,4 +50,4 @@ dataframe.columns = (["Rank", "Artist", "Title"])
 title = [key["title"] for key in songs]
 artist = [key["artist"] for key in songs]
 year = date.split("-")[0]
-print(title)
+print(title,artist,year)
