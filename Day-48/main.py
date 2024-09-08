@@ -5,4 +5,8 @@ from selenium import webdriver
 
 driver = webdriver.Chrome()
 
-driver.get("https://github.com/fira0l")
+driver.get("https://www.amazon.com/dp/B08KT9XY9Z?ref=MARS_NAV_desktop_luna_cb_otgbundl")
+price = driver.find_elements(value="a-price a-text-price a-size-medium apexPriceToPay")
+print(price)
+
+driver.quit()
