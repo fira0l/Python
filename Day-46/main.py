@@ -1,11 +1,14 @@
 import requests
 from datetime import datetime
 import pandas as pd
+from Ui import main
 
 
 from bs4 import BeautifulSoup
 
 URL = "https://www.billboard.com/charts/hot-100/"
+# timee = main.someFunction()
+# print(timee)
 
 date = input("Which time do u want to travel? (YYYY-MM-DD)")
 
