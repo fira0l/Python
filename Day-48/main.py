@@ -7,7 +7,17 @@ from selenium.webdriver.common.by import By
 driver = webdriver.Chrome()
 
 driver.get("https://www.python.org/")
-price = driver.find_element(By.CLASS_NAME, 'menu')
-print(price.tag_name)
+# price = driver.find_element(By.CLASS_NAME, 'menu')
+# print(price.tag_name)
 
-# driver.quit()
+event_time = driver.find_elements(By.CSS_SELECTOR,".event-widget time")
+event_title = driver.find_elements(By.CSS_SELECTOR,".event-widget li a")
+events = {}
+print(event_time)
+for index in range(len(event_time)):
+    events[index] = {
+        "time": event_time[index].text,
+        "name": event_title[index].text
+    }
+print(events)
+driver.quit()
