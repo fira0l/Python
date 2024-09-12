@@ -8,7 +8,7 @@ driver = webdriver.Chrome()
 driver.get(URL)
 article_count = driver.find_element(By.CSS_SELECTOR,"#articlecount a")
 
-print(article_count)
+print(article_count.text)
 
 driver.quit()
 
