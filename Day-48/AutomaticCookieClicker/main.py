@@ -57,10 +57,8 @@ while not money_is_enough:
         timeout = time.time() + 5
 
     if time.time() > five_minute:
+        cookie_per_sec = driver.find_element(By.ID, "cps").text
+        print(cookie_per_sec)
+        break
 
-
-
-
-print(money.text)
-print(items)
 
