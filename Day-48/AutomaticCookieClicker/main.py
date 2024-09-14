@@ -9,3 +9,12 @@ driver = webdriver.Chrome(options=options)
 URL = "https://orteil.dashnet.org/experiments/cookie/"
 
 driver.get(URL)
+cookie = driver.find_element(By.ID, "cookie")
+money = driver.find_element(By.ID, "money")
+money_is_enough = False
+while not money_is_enough:
+    cookie.click()
+    if int(money.text) >3000:
+        money_is_enough = True
+print(money.text)
+
