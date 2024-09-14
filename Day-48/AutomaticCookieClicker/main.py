@@ -14,7 +14,7 @@ money = driver.find_element(By.ID, "money")
 money_is_enough = False
 while not money_is_enough:
     cookie.click()
-    if int(money.text) >3000:
+    if money.text == "3,000":
         money_is_enough = True
 print(money.text)
 
