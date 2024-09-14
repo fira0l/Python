@@ -24,8 +24,22 @@ five_minute = time.time() + 60*5
 while not money_is_enough:
     cookie.click()
 
-    if money.text == "1,000":
-        money_is_enough = True
+    if time.time() > timeout:
+        all_price = driver.find_elements(By.CSS_SELECTOR, "#store b")
+        item_prices = []
+
+        for price in all_price:
+            element_text = price.text
+            if element_text != "":
+                cost = int(element_text.split("-")[1].strip().replace(",", ""))
+                item_prices.append(cost)
+
+        cookie_upgrade = {}
+        for n in range(len(item_prices)):
+            cookie_upgrade[item_prices[n]] = item_ids[n]
+
+
+
 print(money.text)
 print(items)
 
