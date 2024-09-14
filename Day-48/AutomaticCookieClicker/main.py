@@ -48,6 +48,16 @@ while not money_is_enough:
             if cookie_count > cost:
                 affordable_upgrades[cost] = id_
 
+        highest_price_affordable_upgrade = max(affordable_upgrades)
+        print(highest_price_affordable_upgrade)
+        to_purchase_id = affordable_upgrades[highest_price_affordable_upgrade]
+
+        driver.find_element(By.ID, to_purchase_id).click()
+
+        timeout = time.time() + 5
+
+    if time.time() > five_minute:
+
 
 
 
