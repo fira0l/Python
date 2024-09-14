@@ -1,6 +1,6 @@
 from tkinter import *
 
-image = "./spotifylogo.png"
+image = "/spotifylogo.png"
 
 def someFunction():
     user_date = userinput.get()
