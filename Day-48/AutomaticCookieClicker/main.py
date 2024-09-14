@@ -12,9 +12,14 @@ driver.get(URL)
 cookie = driver.find_element(By.ID, "cookie")
 money = driver.find_element(By.ID, "money")
 money_is_enough = False
+
+store = driver.find_elements(By.CSS_SELECTOR, "#store div")
+items = [item.text for item in store]
+
 while not money_is_enough:
     cookie.click()
-    if money.text == "3,000":
+    if money.text == "1,000":
         money_is_enough = True
 print(money.text)
+print(items)
 
