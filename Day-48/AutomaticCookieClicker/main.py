@@ -43,6 +43,12 @@ while not money_is_enough:
             money_element = money_element.replace(",", "")
         cookie_count = int(money_element)
 
+        affordable_upgrades = {}
+        for cost, id_ in cookie_upgrade.items():
+            if cookie_count > cost:
+                affordable_upgrades[cost] = id_
+
+
 
 
 print(money.text)
