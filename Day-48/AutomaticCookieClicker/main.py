@@ -38,6 +38,11 @@ while not money_is_enough:
         for n in range(len(item_prices)):
             cookie_upgrade[item_prices[n]] = item_ids[n]
 
+        money_element = driver.find_element(By.ID, "money").text
+        if "," in money_element:
+            money_element = money_element.replace(",", "")
+        cookie_count = int(money_element)
+
 
 
 print(money.text)
