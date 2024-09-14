@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+import time
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
@@ -15,9 +16,14 @@ money_is_enough = False
 
 store = driver.find_elements(By.CSS_SELECTOR, "#store div")
 items = [item.text for item in store]
+item_ids = [item.get_attribute("id") for item in store]
+
+timeout = time.time()+5
+five_minute = time.time() + 60*5
 
 while not money_is_enough:
     cookie.click()
+
     if money.text == "1,000":
         money_is_enough = True
 print(money.text)
