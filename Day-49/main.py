@@ -1,4 +1,5 @@
 import os
+import time
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -24,3 +25,10 @@ email_field.send_keys(ACCOUNT_EMAIL)
 password_field = driver.find_element(By.ID, "password")
 password_field.send_keys(ACCOUNT_PASSWORD)
 password_field.send_keys(Keys.ENTER)
+
+time.sleep(90)
+
+search = driver.find_element(By.ID, "jobs-search-box-keyword-id-ember697")
+search.send_keys("Python Programming")
+search.send_keys(Keys.ENTER)
+
