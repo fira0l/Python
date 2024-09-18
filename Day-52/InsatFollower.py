@@ -37,12 +37,22 @@ class InstaFollower:
                                      '/html/body/div[4]/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[3]'
                                      '/button[2]')
         notnow.click()
-        self.driver.get(f"{URL}/{Username}/")
+        self.driver.get(f"{URL}/onepiece_staff/")
         time.sleep(30)
 
     def find_followers(self):
         followers = self.driver.find_element(By.PARTIAL_LINK_TEXT, 'followers')
         followers.click()
+
+        time.sleep(2)
+        modal = self.driver.find_element(By.XPATH, '/html/body/div[4]/div/div/div[2]')
+        for i in range(10):
+            # In this case we're executing some Javascript, that's what the execute_script() method does.
+            # The method can accept the script as well as a HTML element.
+            # The modal in this case, becomes the arguments[0] in the script.
+            # Then we're using Javascript to say: "scroll the top of the modal (popup) element by the height of the modal (popup)"
+            self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", modal)
+            time.sleep(2)
 
 
     def follow(self):
