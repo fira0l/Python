@@ -26,10 +26,16 @@ password.send_keys(Keys.ENTER)
 
 time.sleep(45)
 
-button = driver.find_element(By.CSS_SELECTOR,"div button")
+button = driver.find_element(By.CSS_SELECTOR, "div button")
 button.click()
 
-time.sleep(15)
+time.sleep(30)
+
+notnow = driver.find_element(By.XPATH, '/html/body/div[4]/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[3]'
+                                       '/button[2]')
+notnow.click()
+
+
 
 
 
