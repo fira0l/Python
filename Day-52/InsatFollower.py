@@ -31,15 +31,18 @@ class InstaFollower:
         button = self.driver.find_element(By.CSS_SELECTOR, "div button")
         button.click()
 
-        time.sleep(30)
+        time.sleep(45)
 
         notnow = self.driver.find_element(By.XPATH,
                                      '/html/body/div[4]/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[3]'
                                      '/button[2]')
         notnow.click()
+        self.driver.get(f"{URL}/{Username}/")
+        time.sleep(30)
 
     def find_followers(self):
-        pass
+        followers = self.driver.find_element(By.PARTIAL_LINK_TEXT, 'followers')
+        followers.click()
 
 
     def follow(self):
