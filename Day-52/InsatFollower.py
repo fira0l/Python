@@ -26,12 +26,12 @@ class InstaFollower:
         password.send_keys(Password)
         password.send_keys(Keys.ENTER)
 
-        time.sleep(45)
+        time.sleep(50)
 
         button = self.driver.find_element(By.CSS_SELECTOR, "div button")
         button.click()
 
-        time.sleep(45)
+        time.sleep(60)
 
         notnow = self.driver.find_element(By.XPATH,
                                      '/html/body/div[4]/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[3]'
@@ -50,7 +50,8 @@ class InstaFollower:
             # In this case we're executing some Javascript, that's what the execute_script() method does.
             # The method can accept the script as well as a HTML element.
             # The modal in this case, becomes the arguments[0] in the script.
-            # Then we're using Javascript to say: "scroll the top of the modal (popup) element by the height of the modal (popup)"
+            # Then we're using Javascript to say: "scroll the top of the modal (popup) element by the height of the
+            # modal (popup)"
             self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", modal)
             time.sleep(2)
 
