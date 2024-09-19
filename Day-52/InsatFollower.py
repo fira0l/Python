@@ -44,7 +44,7 @@ class InstaFollower:
         followers = self.driver.find_element(By.PARTIAL_LINK_TEXT, 'followers')
         followers.click()
 
-        time.sleep(2)
+        time.sleep(25)
         modal = self.driver.find_element(By.XPATH, '/html/body/div[4]/div/div/div[2]')
         for i in range(10):
             # In this case we're executing some Javascript, that's what the execute_script() method does.
