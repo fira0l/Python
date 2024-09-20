@@ -3,6 +3,7 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import ElementClickInterceptedException
 import time
 
 Username = os.environ.get("USERNAME")
@@ -55,8 +56,12 @@ class InstaFollower:
             self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", modal)
             time.sleep(2)
 
-
     def follow(self):
-        pass
-
-
+        all_buttons = self.driver.find_elements(By.CSS_SELECTOR, "li button")
+        for button in all_buttons:
+            try:
+                button.click()
+                time.sleep(10)
+            except ElementClickInterceptedException:
+                cancel_button = self.driver.find_element(By.XPATH, '/html/body/div[5]/div/div/div/div[3]/button[2]')
+                cancel_button.click()
