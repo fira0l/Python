@@ -27,41 +27,38 @@ class InstaFollower:
         password.send_keys(Password)
         password.send_keys(Keys.ENTER)
 
-        time.sleep(50)
+        time.sleep(15)
 
         button = self.driver.find_element(By.CSS_SELECTOR, "div button")
         button.click()
 
-        time.sleep(60)
+        time.sleep(10)
 
-        notnow = self.driver.find_element(By.XPATH,
-                                     '/html/body/div[4]/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[3]'
-                                     '/button[2]')
-        notnow.click()
         self.driver.get(f"{URL}/onepiece_staff/")
-        time.sleep(30)
+        time.sleep(10)
 
     def find_followers(self):
         followers = self.driver.find_element(By.PARTIAL_LINK_TEXT, 'followers')
         followers.click()
 
-        time.sleep(25)
-        modal = self.driver.find_element(By.XPATH, '/html/body/div[4]/div/div/div[2]')
+        time.sleep(15)
+        scr1 = self.driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[2]')
+
         for i in range(10):
             # In this case we're executing some Javascript, that's what the execute_script() method does.
             # The method can accept the script as well as a HTML element.
             # The modal in this case, becomes the arguments[0] in the script.
             # Then we're using Javascript to say: "scroll the top of the modal (popup) element by the height of the
             # modal (popup)"
-            self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", modal)
+            self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", scr1)
             time.sleep(2)
 
     def follow(self):
-        all_buttons = self.driver.find_elements(By.CSS_SELECTOR, "li button")
+        all_buttons = self.driver.find_elements(By.CSS_SELECTOR, "div button ._acan")
         for button in all_buttons:
             try:
                 button.click()
                 time.sleep(10)
             except ElementClickInterceptedException:
-                cancel_button = self.driver.find_element(By.XPATH, '/html/body/div[5]/div/div/div/div[3]/button[2]')
+                cancel_button = self.driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div[2]/div/div/div[1]/div/div[3]/div/button/div')
                 cancel_button.click()
