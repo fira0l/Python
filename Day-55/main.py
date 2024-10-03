@@ -5,11 +5,25 @@ app = Flask(__name__)
 
 def make_bold(function):
     def wrapper():
-        function()
+        return "<b>" + function() + "</b>"
+    return wrapper
+
+
+def make_emphasis(function):
+    def wrapper():
+        return "<em>" + function() + "</em>"
+    return wrapper
+
+
+def make_underline(function):
+    def wrapper():
+        return "<u>" + function() + "</u>"
     return wrapper
 
 
 @app.route('/')
+@make_emphasis
+@make_underline
 def hellow_world():
     return ("<div> \
     <h1>Hello World</h1><br/>\
@@ -20,7 +34,6 @@ def hellow_world():
 
 
 @app.route('/bye')
-@make_bold
 def bye():
     return "<h1>Good Bye, For Visiting</h1>"
 
