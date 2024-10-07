@@ -13,12 +13,12 @@ blog_data = response.json()
 
 @app.route('/')
 def home():
-    return render_template('index.html', blog_data=blog_data, date=today, author=Author)
+    return render_template('form.html', blog_data=blog_data, date=today, author=Author)
 
 
 @app.route('/post')
 def post():
-    return render_template('index.html', blog_data=blog_data, date=today, author=Author)
+    return render_template('form.html', blog_data=blog_data, date=today, author=Author)
 
 
 @app.route('/post/<int:post_id>')
