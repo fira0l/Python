@@ -5,20 +5,29 @@ from datetime import datetime
 app = Flask(__name__)
 
 API_URL = "https://api.npoint.io/a08e70ad31bd4e7dca38"
+Author = "Firaol A."
+today = datetime.now().strftime('%B %d, %Y')
+response = requests.get(url=API_URL)
+blog_data = response.json()
 
 
 @app.route('/')
 def home():
-    Author = "Firaol A."
-    today = datetime.now().strftime('%B %d, %Y')
-    response = requests.get(url=API_URL)
-    blog_data = response.json()
     return render_template('index.html', blog_data=blog_data, date=today, author=Author)
 
 
 @app.route('/post')
 def post():
-    return render_template('post.html')
+    return render_template('index.html', blog_data=blog_data, date=today, author=Author)
+
+
+@app.route('/post/<int:post_id>')
+def single_post(post_id):
+    post = {}
+    for blog in blog_data:
+        if blog['id'] == post_id:
+            post = blog
+    return render_template('post.html', post=post, author=Author, date=today)
 
 
 @app.route('/about')
