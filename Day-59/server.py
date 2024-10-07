@@ -2,9 +2,10 @@ from flask import Flask, render_template,request
 import requests
 from datetime import datetime
 from smtplib import SMTP
+import os
 
-my_email = 'firaforpython@gmail.com'
-my_password = "odsfplyzjibggmof"
+my_email = os.environ.get('emailmy')
+my_password = os.environ.get('passw')
 
 app = Flask(__name__)
 
