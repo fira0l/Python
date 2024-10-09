@@ -1,29 +1,51 @@
 {% extends 'bootstrap/base.html' %}
 
+
 {% block title %}Restaurants{% endblock %}
 
 {% block content %}
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
+    <div class="row">
+        <div class="col-sm-12">
 
-      <h1>All Cafes</h1>
+            <h1>All Cafes</h1>
 
-	  <table class="table">
-          <!-- This is where you will write the code to render a Bootstrap 
-          Table that contains all the information from the 
-          cafe-data.csv file. -->
-              <tr>
-                  <td>{{  }}</td>
-              </tr>
+            <table class="table">
+                <!-- This is where you will write the code to render a Bootstrap
+                Table that contains all the information from the
+                cafe-data.csv file. -->
+                <thead>
+                <th>Cafe Name</th>
+                <th>Location</th>
+                <th>Open</th>
+                <th>Close</th>
+                <th>Coffe-Rating</th>
+                <th>Wifi-Rating</th>
+                <th>Power Rating-Rating</th>
+                </thead>
+                <tbody>
+                {% for data in cafes:%}
+                <tr>
+                    <td>{{ data[0] }}</td>
+                    <td>{{ data[1] }}</td>
+                    <td>{{ data[2] }}</td>
+                    <td>{{ data[3] }}</td>
+                    <td>{{ data[4] }}</td>
+                    <td>{{ data[5] }}</td>
+                    <td>{{ data[6] }}</td>
+                </tr>
 
-  	  </table>
+                {% endfor %}
+                </tbody>
 
-      <p><a href="#">Return to index page</a></p>
 
+            </table>
+
+            <p><a href="#">Return to index page</a></p>
+
+        </div>
     </div>
-  </div>
 </div>
 
 {% endblock %}
