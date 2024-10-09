@@ -65,7 +65,7 @@ def add_cafe():
         with open('cafe-data.csv', newline='', mode='a') as csv_file:
             csv_file.writelines(
                 f'\n{cafe_name},{cafe_location},{open_time},{close_time},{coffe_rating.encode("utf-8")},{wifi_rating.encode("utf-8")},{power_rating.encode("utf-8")}')
-        return "SuccessFully Submitted"
+        return cafes()
     # Exercise:
     # Make the form write a new row into cafe-data.csv
     # with   if form.validate_on_submit()
