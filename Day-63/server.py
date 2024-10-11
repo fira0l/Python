@@ -20,7 +20,7 @@ class BookSubmissionForm(FlaskForm):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', books=all_books)
 
 
 @app.route('/add', methods=["GET", "POST"])
@@ -33,6 +33,7 @@ def add():
             "rating": form.rating.data,
         }
         all_books.append(book)
+        return render_template('index.html', books=all_books)
 
     return render_template('add.html', form=form)
 
