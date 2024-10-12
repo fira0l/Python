@@ -68,16 +68,14 @@ def edit(book_id):
 
     with App.app_context():
         books = Book.query.all()
-
-        book = Book.query.filter_by(id=book_id)
-        book_data = [book.all()]
+        book = Book.query.filter_by(id=book_id).first()
         book_to_update_by_filter = Book.query.filter_by(id=book_id).first()
         if edit_form.validate_on_submit():
             changed_rating = edit_form.rating.data
             book_to_update_by_filter.rating = changed_rating
             db.session.commit()
             return redirect('/')
-    return render_template('edit.html', book=book_data, form=edit_form)
+    return render_template('edit.html', book=book, form=edit_form)
 
 
 if __name__ == '__main__':
