@@ -31,7 +31,9 @@ class BookSubmissionForm(FlaskForm):
 
 @app.route('/')
 def home():
-    return render_template('index.html', books=all_books)
+    with App.app_context():
+        books = Book.query.all()
+    return render_template('index.html', books=books)
 
 
 @app.route('/add', methods=["GET", "POST"])
