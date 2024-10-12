@@ -1,0 +1,13 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %} Edit Rating {% endblock %}
+
+{% block content %}
+<div class="container">
+    <p>{{ book[0]["title"] }}</p>
+    <p>{{ book[0]["author"] }}</p>
+    <p>{{ book[0]["rating"] }}</p>
+    {{wtf.quick_form(form, novalidate = True)}}
+</div>
+{% endblock %}

@@ -10,7 +10,14 @@
     {% endif %}
     <ul>
         {% for book in books: %}
-        <li>{{ book.title }} - {{ book.author }} - {{ book.rating }}</li>
+
+        <li>
+            <div>
+                <p>{{ book.title }} - {{ book.author }} - {{ book.rating }}</p>
+                <a href="edit/{{ book['id'] }}">Edit Rating</a>
+                <hr>
+            </div>
+        </li>
         {% endfor %}
     </ul>
     <a href="{{ url_for('add') }}">Add New Book</a>
