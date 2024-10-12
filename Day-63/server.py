@@ -44,7 +44,7 @@ def add():
             "rating": form.rating.data,
         }
         with App.app_context():
-            new_book = Book(id=1, title=book['title'], author=book["author"], rating=book["rating"])
+            new_book = Book(title=book['title'], author=book["author"], rating=book["rating"])
             db.session.add(new_book)
             db.session.commit()
 
