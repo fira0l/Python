@@ -78,6 +78,15 @@ def edit(book_id):
     return render_template('edit.html', book=book, form=edit_form)
 
 
+@app.route('/delete/<int:book_id>')
+def delete(book_id):
+    with App.app_context():
+        book_to_delete = Book.query.get(book_id)
+        db.session.delete(book_to_delete)
+        db.session.commit()
+        return redirect('/')
+
+
 if __name__ == '__main__':
     with App.app_context():
         db.create_all()

@@ -15,6 +15,7 @@
             <div>
                 <p>{{ book.title }} - {{ book.author }} - {{ book.rating }}</p>
                 <a href="edit/{{ book['id'] }}">Edit Rating</a>
+                <a style="padding: 0 10px" href="delete/{{ book['id'] }}">Delete</a>
                 <hr>
             </div>
         </li>
