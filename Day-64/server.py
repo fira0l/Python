@@ -9,7 +9,10 @@ Bootstrap(app)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    with App.app_context():
+        movies = Movie.query.all()
+
+    return render_template('index.html',movies=movies)
 
 
 @app.route('/add')
