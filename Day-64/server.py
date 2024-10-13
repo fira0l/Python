@@ -53,20 +53,21 @@ def add():
         Movies.append(movie)
         result_movie = movie[0]
         year = result_movie["release_date"].split('-')[0]
-        return render_template('select.html', data=movie)
-        # with App.app_context():
-        #     new_movie = Movie(
-        #         title=result_movie["title"],
-        #         description=result_movie["overview"],
-        #         rating=result_movie["vote_average"],
-        #         review="Awesome Movie",
-        #         year=year,
-        #         ranking=3,
-        #         img_url=f"https://image.tmdb.org/t/p/w300_and_h450_bestv2/{result_movie["poster_path"]}"
-        #     )
-        #     db.session.add(new_movie)
-        #     db.session.commit()
-        #     return render_template('select.html', data=movie)
+        # return render_template('select.html', data=movie)
+        with App.app_context():
+            new_movie = Movie(
+                title=result_movie["title"],
+                description=result_movie["overview"],
+                rating=result_movie["vote_average"],
+                review="Awesome Movie",
+                year=year,
+                ranking=3,
+                img_url=f"https://image.tmdb.org/t/p/w300_and_h450_bestv2/{result_movie["poster_path"]}"
+            )
+            db.session.add(new_movie)
+            db.session.commit()
+            return redirect('/')
+            # return render_template('select.html', data=movie)
     # with App.app_context():
     #     db.session.add(new_movie)
     #     db.session.commit()
@@ -76,18 +77,18 @@ def add():
 
 @app.route('/select')
 def select():
-    with App.app_context():
-        new_movie = Movie(
-            title=movie["title"],
-            description=movie["overview"],
-            rating=movie["vote_average"],
-            review="Awesome Movie",
-            year=year,
-            ranking=3,
-            img_url=f"https://image.tmdb.org/t/p/w300_and_h450_bestv2/{movie["poster_path"]}"
-        )
-        db.session.add(new_movie)
-        db.session.commit()
+    # with App.app_context():
+    #     new_movie = Movie(
+    #         title=movie["title"],
+    #         description=movie["overview"],
+    #         rating=movie["vote_average"],
+    #         review="Awesome Movie",
+    #         year=year,
+    #         ranking=3,
+    #         img_url=f"https://image.tmdb.org/t/p/w300_and_h450_bestv2/{movie["poster_path"]}"
+    #     )
+    #     db.session.add(new_movie)
+    #     db.session.commit()
     return render_template('select.html')
 
 
