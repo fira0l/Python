@@ -60,6 +60,15 @@ def edit(movie_id):
     return render_template('edit.html', form=form)
 
 
+@app.route('/delete/<int:movie_id>')
+def delete(movie_id):
+    with App.app_context():
+        movie_to_delete = Movie.query.get(movie_id)
+        db.session.delete(movie_to_delete)
+        db.session.commit()
+        return redirect('/')
+
+
 if __name__ == "__main__":
     with App.app_context():
         db.create_all()
