@@ -1,10 +1,19 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
+from wtforms import StringField,SubmitField,FloatField
+from wtforms.validators import DataRequired
+
 from database import App, db, Movie
 
 app = Flask(__name__)
 Bootstrap(app)
+
+
+class RateMovieForm(FlaskForm):
+    rating = FloatField("Rating", validators=[DataRequired()])
+    review = StringField("Review", validators=[DataRequired()])
+    sumit = SubmitField("Submit")
 
 
 @app.route('/')
@@ -39,7 +48,9 @@ def select():
 
 @app.route('/edit')
 def edit():
-    return render_template('edit.html')
+    form = RateMovieForm()
+    form.validate_on_submit()
+    return render_template('edit.html', form=form)
 
 
 if __name__ == "__main__":
