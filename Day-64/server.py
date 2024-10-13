@@ -47,10 +47,15 @@ def select():
     return render_template('select.html')
 
 
-@app.route('/edit/<int:movie_id>')
+@app.route('/edit/<int:movie_id>', methods=["GET", "POST"])
 def edit(movie_id):
     form = RateMovieForm()
-    form.validate_on_submit()
+    if form.validate_on_submit():
+        with App.app_context():
+            movie_to_update = Movie.query.get(movie_id)
+            movie_to_update.rating = form.rating.data
+            movie_to_update.review = form.review.data
+            db.session.commit()
     return render_template('edit.html', form=form)
 
 
