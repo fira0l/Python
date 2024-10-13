@@ -7,6 +7,7 @@ from wtforms.validators import DataRequired
 from database import App, db, Movie
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "thisismysecretkey"
 Bootstrap(app)
 
 
@@ -46,8 +47,8 @@ def select():
     return render_template('select.html')
 
 
-@app.route('/edit')
-def edit():
+@app.route('/edit/<int:movie_id>')
+def edit(movie_id):
     form = RateMovieForm()
     form.validate_on_submit()
     return render_template('edit.html', form=form)
