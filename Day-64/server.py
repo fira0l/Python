@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,FloatField
@@ -12,8 +12,8 @@ Bootstrap(app)
 
 
 class RateMovieForm(FlaskForm):
-    rating = FloatField("Rating", validators=[DataRequired()])
-    review = StringField("Review", validators=[DataRequired()])
+    rating = FloatField("Your Rating out of 10 e.g 7.5", validators=[DataRequired()])
+    review = StringField("Your Review", validators=[DataRequired()])
     sumit = SubmitField("Submit")
 
 
@@ -56,6 +56,7 @@ def edit(movie_id):
             movie_to_update.rating = form.rating.data
             movie_to_update.review = form.review.data
             db.session.commit()
+            return redirect('/')
     return render_template('edit.html', form=form)
 
 
