@@ -1,10 +1,13 @@
 from flask import Flask, render_template, redirect
+import requests
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField,FloatField
+from wtforms import StringField, SubmitField, FloatField, IntegerField
 from wtforms.validators import DataRequired
 
 from database import App, db, Movie
+
+TMDB_URL = "https://api.themoviedb.org/3/search/movie"
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "thisismysecretkey"
@@ -14,32 +17,58 @@ Bootstrap(app)
 class RateMovieForm(FlaskForm):
     rating = FloatField("Your Rating out of 10 e.g 7.5", validators=[DataRequired()])
     review = StringField("Your Review", validators=[DataRequired()])
-    sumit = SubmitField("Submit")
+    submit = SubmitField("Submit")
+
+
+class AddMovieForm(FlaskForm):
+    title = StringField("Title", validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 
 @app.route('/')
 def home():
     with App.app_context():
         movies = Movie.query.all()
+    return render_template('index.html', movies=movies)
 
-    return render_template('index.html',movies=movies)
 
-
-@app.route('/add')
+@app.route('/add', methods=["GET", "POST"])
 def add():
-    with App.app_context():
-        new_movie = Movie(
-            title="Phone Booth",
-            year=2002,
-            description="Publicist Stuart Shepard finds himself trapped in a phone booth, pinned down by an extortionist's sniper rifle. Unable to leave or receive outside help, Stuart's negotiation with the caller leads to a jaw-dropping climax.",
-            rating=7.3,
-            ranking=10,
-            review="My favourite character was the caller.",
-            img_url="https://image.tmdb.org/t/p/w500/tjrX2oWRCM3Tvarz38zlZM7Uc10.jpg"
-        )
-        db.session.add(new_movie)
-        db.session.commit()
-    return render_template('add.html')
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOGI5ZjAzNWMwYzQ4OWI5ZDZkNGQ3ZjFiNjZlOTgwMCIsIm5iZiI6MTcyODgzMjUxNi43OTkyODQsInN1YiI6IjY3MGJlMTYyYjE1ZDk3YjFhOTNjOTk0NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.F7P-Pc2DQMuCOupRfqg93vhYlbaHV7pjBA18ciJO0-U"
+    }
+    form = AddMovieForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        params = {
+            "query": title,
+            "include_adult": False
+        }
+        response = requests.get(url=TMDB_URL, params=params, headers=headers)
+        movie_data = response.json()
+        print(movie_data)
+        movie = movie_data["results"]
+        result_movie = movie[0]
+        year = result_movie["release_date"].split('-')[0]
+        with App.app_context():
+            new_movie = Movie(
+                title=result_movie["title"],
+                description=result_movie["overview"],
+                rating=result_movie["vote_average"],
+                review="Awesome Movie",
+                year=year,
+                ranking=3,
+                img_url=f"https://image.tmdb.org/t/p/w300_and_h450_bestv2/{result_movie["poster_path"]}"
+            )
+            db.session.add(new_movie)
+            db.session.commit()
+            return redirect('/')
+    # with App.app_context():
+    #     db.session.add(new_movie)
+    #     db.session.commit()
+    #     return redirect('/')
+    return render_template('add.html', form=form)
 
 
 @app.route('/select')
