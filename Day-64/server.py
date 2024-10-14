@@ -56,8 +56,8 @@ def add():
         print(movie_data)
         movie = movie_data["results"]
         Movies.append(movie)
-        result_movie = movie[0]
-        year = result_movie["release_date"].split('-')[0]
+        # result_movie = movie[0]
+        # year = result_movie["release_date"].split('-')[0]
         return render_template('select.html', data=movie)
         # with App.app_context():
         #     new_movie = Movie(
@@ -118,6 +118,7 @@ def find_movie():
             )
             db.session.add(new_movie)
             db.session.commit()
+            # movie = Movie.query.get(title=f"{new_movie.title}")
             return redirect('/')
 
 
