@@ -16,7 +16,7 @@
   {% for movie in data: %}
   <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{ movie['poster_path'] }}">
   <p>
-    <a href="edit/{{movie['id']}}"> {{movie["title"]}} - {{movie["release_date"]}}</a>
+    <a href="{{ url_for('find_movie', id=movie.id) }}"> {{movie["title"]}} - {{movie["release_date"]}}</a>
   </p>
   {% endfor %}
 </div>

@@ -1,4 +1,6 @@
-from flask import Flask, render_template, redirect
+import os
+
+from flask import Flask, render_template, redirect, request
 import requests
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
@@ -8,6 +10,9 @@ from wtforms.validators import DataRequired
 from database import App, db, Movie
 
 TMDB_URL = "https://api.themoviedb.org/3/search/movie"
+MOVIE_DB_INFO_URL="https://api.themoviedb.org/3/movie"
+MOVIE_DB_API_KEY = os.environ.get("api")
+MOVIE_DB_IMAGE_URL= "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "thisismysecretkey"
@@ -53,20 +58,20 @@ def add():
         Movies.append(movie)
         result_movie = movie[0]
         year = result_movie["release_date"].split('-')[0]
-        # return render_template('select.html', data=movie)
-        with App.app_context():
-            new_movie = Movie(
-                title=result_movie["title"],
-                description=result_movie["overview"],
-                rating=result_movie["vote_average"],
-                review="Awesome Movie",
-                year=year,
-                ranking=3,
-                img_url=f"https://image.tmdb.org/t/p/w300_and_h450_bestv2/{result_movie["poster_path"]}"
-            )
-            db.session.add(new_movie)
-            db.session.commit()
-            return redirect('/')
+        return render_template('select.html', data=movie)
+        # with App.app_context():
+        #     new_movie = Movie(
+        #         title=result_movie["title"],
+        #         description=result_movie["overview"],
+        #         rating=result_movie["vote_average"],
+        #         review="Awesome Movie",
+        #         year=year,
+        #         ranking=None,
+        #         img_url=f"https://image.tmdb.org/t/p/w300_and_h450_bestv2/{result_movie["poster_path"]}"
+        #     )
+        #     db.session.add(new_movie)
+        #     db.session.commit()
+        #     return redirect('/')
             # return render_template('select.html', data=movie)
     # with App.app_context():
     #     db.session.add(new_movie)
@@ -90,6 +95,30 @@ def select():
     #     db.session.add(new_movie)
     #     db.session.commit()
     return render_template('select.html')
+
+
+@app.route("/find")
+def find_movie():
+    movie_api_id = request.args.get("id")
+    if movie_api_id:
+        movie_api_url = f"{MOVIE_DB_INFO_URL}/{movie_api_id}"
+        #The language parameter is optional, if you were making the website for a different audience
+        #e.g. Hindi speakers then you might choose "hi-IN"
+        response = requests.get(movie_api_url, params={"api_key": MOVIE_DB_API_KEY, "language": "en-US"})
+        data = response.json()
+        print(data)
+        with App.app_context():
+            new_movie = Movie(
+                title=data["title"],
+                #The data in release_date includes month and day, we will want to get rid of.
+                year=data["release_date"].split("-")[0],
+                img_url=f"{MOVIE_DB_IMAGE_URL}{data['poster_path']}",
+                description=data["overview"]
+            )
+            db.session.add(new_movie)
+            db.session.commit()
+            return redirect('/')
+
 
 
 @app.route('/edit/<int:movie_id>', methods=["GET", "POST"])
