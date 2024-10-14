@@ -112,13 +112,13 @@ def find_movie():
                 title=data["title"],
                 #The data in release_date includes month and day, we will want to get rid of.
                 year=data["release_date"].split("-")[0],
+                rating=data["vote_average"],
                 img_url=f"{MOVIE_DB_IMAGE_URL}{data['poster_path']}",
                 description=data["overview"]
             )
             db.session.add(new_movie)
             db.session.commit()
             return redirect('/')
-
 
 
 @app.route('/edit/<int:movie_id>', methods=["GET", "POST"])
