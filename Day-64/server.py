@@ -34,8 +34,15 @@ class AddMovieForm(FlaskForm):
 @app.route('/')
 def home():
     with App.app_context():
-        movies = Movie.query.all()
-    return render_template('index.html', movies=movies)
+        all_movies = Movie.query.order_by(Movie.rating).all()
+        # This line loops through all the movies
+        for i in range(len(all_movies)):
+            # This line gives each movie a new ranking reversed from their order in all_movies
+            all_movies[i].ranking = len(all_movies) - i
+        db.session.commit()
+        movies = Movie.query.order_by(Movie.rating).all()
+    return render_template("index.html", movies=movies)
+    # return render_template('index.html', movies=movies)
 
 
 @app.route('/add', methods=["GET", "POST"])
@@ -124,6 +131,8 @@ def find_movie():
 
 @app.route('/edit/<int:movie_id>', methods=["GET", "POST"])
 def edit(movie_id):
+    with App.app_context():
+        movie_name = Movie.query.get(movie_id).title
     form = RateMovieForm()
     if form.validate_on_submit():
         with App.app_context():
@@ -137,7 +146,7 @@ def edit(movie_id):
                 movie_to_update.review = form.review.data
                 db.session.commit()
             return redirect('/')
-    return render_template('edit.html', form=form)
+    return render_template('edit.html', form=form, name=movie_name)
 
 
 @app.route('/delete/<int:movie_id>')
