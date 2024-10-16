@@ -21,6 +21,16 @@ def get_random_cafe():
         return jsondata
 
 
+@app.route('/all')
+def all_cafes():
+    with App.app_context():
+        cafes = Cafe.query.all()
+        all_cafe = [cafe.to_dict() for cafe in cafes]
+        return all_cafe
+
+
+
+
 ## HTTP POST - Create Record
 
 ## HTTP PUT/PATCH - Update Record
