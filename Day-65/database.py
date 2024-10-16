@@ -26,4 +26,7 @@ class Cafe(db.Model):
         return 'Name <%r>' % self.name
 
     def to_dict(self):
-        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
+        dictionary = {}
+        for column in self.__table__.columns:
+            dictionary[column.name] = getattr(self, column.name)
+        return dictionary
