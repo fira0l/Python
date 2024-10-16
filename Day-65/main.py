@@ -26,7 +26,7 @@ def all_cafes():
     with App.app_context():
         cafes = Cafe.query.all()
         all_cafe = [cafe.to_dict() for cafe in cafes]
-        return all_cafe
+        return jsonify(Cafes=all_cafe)
 
 
 
