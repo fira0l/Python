@@ -24,3 +24,6 @@ class Cafe(db.Model):
 
     def __repr__(self):
         return 'Name <%r>' % self.name
+
+    def to_dict(self):
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
