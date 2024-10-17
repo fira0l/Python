@@ -1,9 +1,11 @@
 import random
 from database import db, App, Cafe
 from flask import Flask, jsonify, render_template, request
+from flask_wtf import FlaskForm
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
-
+Bootstrap(app)
 
 @app.route("/")
 def home():
