@@ -29,7 +29,9 @@ def all_cafes():
         return jsonify(Cafes=all_cafe)
 
 
-
+@app.route('/search/<str:cafe_loc>')
+def search_cafe():
+    pass
 
 ## HTTP POST - Create Record
 
