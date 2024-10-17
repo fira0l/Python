@@ -1,11 +1,8 @@
 import random
 from database import db, App, Cafe
 from flask import Flask, jsonify, render_template, request
-from flask_wtf import FlaskForm
-from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
-Bootstrap(app)
 
 @app.route("/")
 def home():
@@ -61,7 +58,9 @@ def add_cafe():
         )
         db.session.add(new_cafe)
         db.session.commit()
-    return jsonify(response={"success": "Successfully added the new cafe."})
+        json_data = jsonify(response={"success": "Successfully added the new cafe."})
+        return json_data
+
 
 
 ## HTTP PUT/PATCH - Update Record
