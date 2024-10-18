@@ -81,7 +81,22 @@ def update_coffe(coffe_id):
             }), 404
 
 
+@app.route('/report-closed/<int:cafe_id>', methods=["DELETE"])
+def delete_record(cafe_id):
+    api_key = request.args.get('api-key')
+    with App.app_context():
+        cafe_to_delete = Cafe.query.get(cafe_id)
+        if api_key == "TopSecretApiKey":
+            if cafe_to_delete:
+                db.session.delete(cafe_to_delete)
+                db.session.commit()
+                return jsonify(Success={"success": "The record have been deleted from the data base"}), 200
+            else:
+                return jsonify(error={"error": "The Record You want to delete is not found in the database"}), 404
+        else:
+            return jsonify(error={"error": "You have entered Wrong api key or have no authorization "}), 403
 # HTTP DELETE - Delete Record
+
 
 if __name__ == '__main__':
     with App.app_context():
