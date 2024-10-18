@@ -19,6 +19,7 @@ Bootstrap(app)
 # WTForm
 with App.app_context():
     posts = BlogPost.query.all()
+    print(posts)
 
 
 class CreatePostForm(FlaskForm):
@@ -37,11 +38,10 @@ def get_all_posts():
 
 @app.route("/post/<int:index>")
 def show_post(index):
-    requested_post = None
-    for blog_post in posts:
-        if blog_post["id"] == index:
-            requested_post = blog_post
-    return render_template("post.html", post=requested_post)
+    with App.app_context():
+        requested_post = BlogPost.query.filter_by(id=index).first()
+        print(requested_post)
+        return render_template("post.html", post=requested_post)
 
 
 @app.route("/about")
@@ -54,7 +54,12 @@ def contact():
     return render_template("contact.html")
 
 
+@app.route('/edit_post/<int:post_id>')
+def edit_post(post_id):
+    pass
+
+
 if __name__ == "__main__":
     with App.app_context():
         db.create_all()
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
