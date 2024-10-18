@@ -4,6 +4,7 @@ from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -38,7 +39,8 @@ def search_cafe():
         else:
             return jsonify(error={"Not Found": "Sorry, we don't have a cafe at that location."})
 
-## HTTP POST - Create Record
+
+# HTTP POST - Create Record
 
 
 @app.route('/add', methods=["POST"])
@@ -62,11 +64,24 @@ def add_cafe():
         return json_data
 
 
+# HTTP PUT/PATCH - Update Record
 
-## HTTP PUT/PATCH - Update Record
+@app.route('/update-price/<int:coffe_id>', methods=["PATCH"])
+def update_coffe(coffe_id):
+    new_price = request.args.get("new_price")
+    with App.app_context():
+        cafe_to_update = Cafe.query.filter_by(id=coffe_id).first()
+        if cafe_to_update:
+            cafe_to_update.coffee_price = new_price
+            db.session.commit()
+            return jsonify(response={"Success": "Successfuly Updated the Price"}), 200
+        else:
+            return jsonify(error={
+                "Not found": "Sorry a cafe with that id is not Found in the database"
+            }), 404
 
-## HTTP DELETE - Delete Record
 
+# HTTP DELETE - Delete Record
 
 if __name__ == '__main__':
     with App.app_context():
