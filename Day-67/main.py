@@ -1,3 +1,5 @@
+import datetime
+
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
@@ -17,9 +19,7 @@ ckeditor = CKEditor(app)
 Bootstrap(app)
 
 # WTForm
-with App.app_context():
-    posts = BlogPost.query.all()
-    print(posts)
+
 
 
 class CreatePostForm(FlaskForm):
@@ -27,12 +27,14 @@ class CreatePostForm(FlaskForm):
     subtitle = StringField("Subtitle", validators=[DataRequired()])
     author = StringField("Your Name", validators=[DataRequired()])
     img_url = StringField("Blog Image URL", validators=[DataRequired(), URL()])
-    body = StringField("Blog Content", validators=[DataRequired()])
+    body = CKEditorField("Blog Content", validators=[DataRequired()])
     submit = SubmitField("Submit Post")
 
 
 @app.route('/')
 def get_all_posts():
+    with App.app_context():
+        posts = BlogPost.query.all()
     return render_template("index.html", all_posts=posts)
 
 
@@ -42,6 +44,31 @@ def show_post(index):
         requested_post = BlogPost.query.filter_by(id=index).first()
         print(requested_post)
         return render_template("post.html", post=requested_post)
+
+
+@app.route('/new_post', methods=["GET", "POST"])
+def new_post():
+    form = CreatePostForm()
+    if form.validate_on_submit():
+        blog_title = form.title.data
+        blog_subtitle = form.subtitle.data
+        blog_body = form.body.data
+        blog_img_url = form.img_url.data
+        blog_author = form.author.data
+        with App.app_context():
+            new_blog = BlogPost(
+                title=blog_title,
+                subtitle=blog_subtitle,
+                date=datetime.datetime.now().strftime("%B %d, %Y"),
+                body=blog_body,
+                author=blog_author,
+                img_url=blog_img_url
+            )
+            db.session.add(new_blog)
+            db.session.commit()
+            return redirect('/')
+
+    return render_template('make-post.html', form=form)
 
 
 @app.route("/about")
