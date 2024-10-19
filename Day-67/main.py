@@ -16,8 +16,7 @@ import os
 # posts = requests.get("https://api.npoint.io/43644ec4f0013682fc0d").json()
 
 app = Flask(__name__)
-SECRET_KEY = os.urandom(32)
-app.secret_key = SECRET_KEY
+app.config['SECRET_KEY'] = "This is my secret key for my forms using csrf"
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
@@ -83,18 +82,27 @@ def contact():
     return render_template("contact.html")
 
 
-@app.route('/edit_post/<int:post_id>', methods=["GET", "POST"])
+@app.route('/edit_post/<int:post_id>', methods=["GET", "POST", "PUT"])
 def edit_post(post_id):
     with App.app_context():
         post = BlogPost.query.get(post_id)
-        edit_form = CreatePostForm(
-            title=post.title,
-            subtitle=post.subtitle,
-            img_url=post.img_url,
-            author=post.author,
-            body=post.body
+    edit_form = CreatePostForm(
+        title=post.title,
+        subtitle=post.subtitle,
+        img_url=post.img_url,
+        author=post.author,
+        body=post.body
         )
-        return render_template('make-post.html', form=edit_form, is_edit=True)
+    if edit_form.validate_on_submit():
+        with App.app_context():
+            post.title = edit_form.title.data
+            post.subtitle = edit_form.subtitle.data
+            post.img_url = edit_form.img_url.data
+            post.author = edit_form.author.data
+            post.body = edit_form.body.data
+            db.session.commit()
+            return redirect(url_for("show_post", index=post.id))
+    return render_template('make-post.html', form=edit_form, is_edit=True)
 
 
 if __name__ == "__main__":
