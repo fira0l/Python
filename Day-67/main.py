@@ -7,6 +7,8 @@ from database import App, db, BlogPost
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, URL
 from flask_ckeditor import CKEditor, CKEditorField
+import os
+
 
 
 ## Delete this code:
@@ -14,12 +16,12 @@ from flask_ckeditor import CKEditor, CKEditorField
 # posts = requests.get("https://api.npoint.io/43644ec4f0013682fc0d").json()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+SECRET_KEY = os.urandom(32)
+app.secret_key = SECRET_KEY
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
 # WTForm
-
 
 
 class CreatePostForm(FlaskForm):
@@ -81,9 +83,18 @@ def contact():
     return render_template("contact.html")
 
 
-@app.route('/edit_post/<int:post_id>')
+@app.route('/edit_post/<int:post_id>', methods=["GET", "POST"])
 def edit_post(post_id):
-    pass
+    with App.app_context():
+        post = BlogPost.query.get(post_id)
+        edit_form = CreatePostForm(
+            title=post.title,
+            subtitle=post.subtitle,
+            img_url=post.img_url,
+            author=post.author,
+            body=post.body
+        )
+        return render_template('make-post.html', form=edit_form, is_edit=True)
 
 
 if __name__ == "__main__":
