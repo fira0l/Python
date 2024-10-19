@@ -48,17 +48,25 @@ def register():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-
+    error = None
+    success = None
     if request.method == "POST":
         user_email = request.form.get("email")
         user_password = request.form.get("password")
         with App.app_context():
             user = User.query.filter_by(email=user_email).first()
-            is_user = check_password_hash(user.password, user_password)
-            if is_user:
-                login_user(user)
-                flash("Logged In Successfully.")
-                return render_template('secrets.html', name=user.name)
+            if user:
+                is_user = check_password_hash(user.password, user_password)
+                if is_user:
+                    login_user(user)
+                    flash("Logged In Successfully.")
+                    return render_template('secrets.html', name=user.name)
+                else:
+                    error = 'Email is not Found in the database.Register first'
+                    return redirect(url_for('register'))
+            else:
+                flash("Email does not exist! please register")
+                return redirect(url_for('register'))
 
     return render_template("login.html")
 
@@ -71,6 +79,7 @@ def secrets():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
