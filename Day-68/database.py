@@ -7,6 +7,8 @@ App = Flask(__name__)
 App.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 App.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(App)
+login_manager = LoginManager()
+login_manager.init_app(App)
 
 
 class User(UserMixin, db.Model):
