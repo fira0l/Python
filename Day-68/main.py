@@ -34,8 +34,18 @@ def register():
     return render_template("register.html")
 
 
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        user_email = request.form.get("email")
+        user_password = request.form.get("password")
+        with App.app_context():
+            user = User.query.filter_by(email=user_email).first()
+            is_user = check_password_hash(user.password, user_password)
+            if is_user:
+                return render_template('/secrets.html', name=user.name)
+            else:
+                return "<h1>Authorization Error</h1>"
     return render_template("login.html")
 
 
