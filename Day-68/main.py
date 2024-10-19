@@ -62,7 +62,7 @@ def login():
                     flash("Logged In Successfully.")
                     return render_template('secrets.html', name=user.name)
                 else:
-                    error = 'Email is not Found in the database.Register first'
+                    error = 'Invalid Credentials please make sure you enter Correct Information!'
                     return redirect(url_for('register'))
             else:
                 flash("Email does not exist! please register")
