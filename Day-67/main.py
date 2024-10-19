@@ -82,7 +82,7 @@ def contact():
     return render_template("contact.html")
 
 
-@app.route('/edit_post/<int:post_id>', methods=["GET", "POST", "PUT"])
+@app.route('/edit_post/<int:post_id>', methods=["GET", "POST"])
 def edit_post(post_id):
     with App.app_context():
         post = BlogPost.query.get(post_id)
@@ -95,6 +95,7 @@ def edit_post(post_id):
         )
     if edit_form.validate_on_submit():
         with App.app_context():
+            post = BlogPost.query.get(post_id)
             post.title = edit_form.title.data
             post.subtitle = edit_form.subtitle.data
             post.img_url = edit_form.img_url.data
