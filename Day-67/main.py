@@ -106,6 +106,15 @@ def edit_post(post_id):
     return render_template('make-post.html', form=edit_form, is_edit=True)
 
 
+@app.route('/delete-post/<post_id>')
+def delete_post(post_id):
+    with App.app_context():
+        post = BlogPost.query.get(post_id)
+        db.session.delete(post)
+        db.session.commit()
+        return redirect('/')
+
+
 if __name__ == "__main__":
     with App.app_context():
         db.create_all()
