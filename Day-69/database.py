@@ -17,7 +17,8 @@ login_manager.init_app(App)
 
 @login_manager.user_loader
 def load_user(user):
-    return User.get(user)
+    with App.app_context():
+        return User.query.get(user)
 
 
 class BlogPost(db.Model):
