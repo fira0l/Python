@@ -38,6 +38,10 @@ def register():
         user_password = form.password.data
         hashed_password = generate_password_hash(password=user_password, method="pbkdf2:sha256", salt_length=8)
         with App.app_context():
+            if User.query.filter_by(email=user_email).first():
+                flash("You've already Signed up with that email, please login instead!")
+                return redirect(url_for('login'))
+            
             new_user = User(
                 name=username,
                 email=user_email,
