@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import CreatePostForm,UserSignUpForm
+from forms import CreatePostForm, UserSignUpForm, LoginForm
 import gravatar
 from database import db, BlogPost, App, User
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
@@ -45,13 +45,27 @@ def register():
             )
             db.session.add(new_user)
             db.session.commit()
+            login_user(new_user)
             return redirect(url_for('get_all_posts'))
     return render_template("register.html", form=form)
 
 
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    form = LoginForm()
+    if form.validate_on_submit():
+        with App.app_context():
+            user = User.query.filter_by(email=form.email.data).first()
+            if not user:
+                flash("The email doesn't exist, please try again.")
+                return redirect(url_for('login'))
+            elif not check_password_hash(user.password, form.password.data):
+                flash("Password incorrect, please try again.")
+                return redirect(url_for('login'))
+            else:
+                login_user(user)
+                return redirect(url_for('get_all_posts'))
+    return render_template("login.html", form=form)
 
 
 @app.route('/logout')
