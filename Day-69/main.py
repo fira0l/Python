@@ -1,7 +1,8 @@
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, abort
+from functools import wraps
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
-from datetime import date
+from datetime import date, datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import CreatePostForm, UserSignUpForm, LoginForm
 import gravatar
@@ -16,6 +17,17 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
+def admin_only(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        #If id is not 1 then return abort with 403 error
+        if load_user != 1:
+            return abort(403)
+        #Otherwise continue with the route function
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 @login_manager.user_loader
 def load_user(user_id):
     with App.app_context():
@@ -26,7 +38,8 @@ def load_user(user_id):
 def get_all_posts():
     with App.app_context():
         posts = BlogPost.query.all()
-        return render_template("index.html", all_posts=posts)
+        is_admin = load_user == 1
+        return render_template("index.html", all_posts=posts, current_user=current_user, is_admin=is_admin)
 
 
 @app.route('/register', methods=["GET", "POST"])
@@ -51,7 +64,7 @@ def register():
             db.session.commit()
             login_user(new_user)
             return redirect(url_for('get_all_posts'))
-    return render_template("register.html", form=form, logged_in=current_user.is_authenticated)
+    return render_template("register.html", form=form, current_user=current_user)
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -69,34 +82,35 @@ def login():
             else:
                 login_user(user)
                 return redirect(url_for('get_all_posts'))
-    return render_template("login.html", form=form, logged_in=current_user.is_authenticated)
+    return render_template("login.html", form=form, current_user=current_user)
 
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('get_all_posts', logged_in=True))
+    return redirect(url_for('get_all_posts'))
 
 
 @app.route("/post/<int:post_id>")
 def show_post(post_id):
     with App.app_context():
         requested_post = BlogPost.query.get(post_id)
-        return render_template("post.html", post=requested_post)
+        return render_template("post.html", post=requested_post, current_user=current_user)
 
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return render_template("about.html", current_user=current_user)
 
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", current_user=current_user)
 
 
-@app.route("/new-post")
+@app.route("/new-post", methods=["GET", "POST"])
+# @admin_only
 def add_new_post():
     form = CreatePostForm()
     if form.validate_on_submit():
@@ -112,10 +126,11 @@ def add_new_post():
             db.session.add(new_post)
             db.session.commit()
             return redirect(url_for("get_all_posts"))
-    return render_template("make-post.html", form=form)
+    return render_template("make-post.html", form=form, current_user=current_user)
 
 
 @app.route("/edit-post/<int:post_id>")
+@admin_only
 def edit_post(post_id):
     with App.app_context():
         post = BlogPost.query.get(post_id)
@@ -137,10 +152,11 @@ def edit_post(post_id):
             db.session.commit()
             return redirect(url_for("show_post", post_id=post.id))
 
-    return render_template("make-post.html", form=edit_form)
+    return render_template("make-post.html", form=edit_form, is_edit=True, current_user=current_user)
 
 
 @app.route("/delete/<int:post_id>")
+@admin_only
 def delete_post(post_id):
     with App.app_context():
         post_to_delete = BlogPost.query.get(post_id)
