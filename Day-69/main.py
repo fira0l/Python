@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import CreatePostForm
+from forms import CreatePostForm,UserSignUpForm
 import gravatar
 from database import db, BlogPost, App, User
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
@@ -31,7 +31,8 @@ def get_all_posts():
 
 @app.route('/register')
 def register():
-    return render_template("register.html")
+    form = UserSignUpForm()
+    return render_template("register.html", form=form)
 
 
 @app.route('/login')
