@@ -41,7 +41,7 @@ def register():
             if User.query.filter_by(email=user_email).first():
                 flash("You've already Signed up with that email, please login instead!")
                 return redirect(url_for('login'))
-            
+
             new_user = User(
                 name=username,
                 email=user_email,
@@ -51,7 +51,7 @@ def register():
             db.session.commit()
             login_user(new_user)
             return redirect(url_for('get_all_posts'))
-    return render_template("register.html", form=form)
+    return render_template("register.html", form=form, logged_in=current_user.is_authenticated)
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -69,14 +69,14 @@ def login():
             else:
                 login_user(user)
                 return redirect(url_for('get_all_posts'))
-    return render_template("login.html", form=form)
+    return render_template("login.html", form=form, logged_in=current_user.is_authenticated)
 
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('get_all_posts'))
+    return redirect(url_for('get_all_posts', logged_in=True))
 
 
 @app.route("/post/<int:post_id>")
