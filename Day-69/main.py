@@ -29,9 +29,23 @@ def get_all_posts():
         return render_template("index.html", all_posts=posts)
 
 
-@app.route('/register')
+@app.route('/register', methods=["GET", "POST"])
 def register():
     form = UserSignUpForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        user_email = form.email.data
+        user_password = form.password.data
+        hashed_password = generate_password_hash(password=user_password, method="pbkdf2:sha256", salt_length=8)
+        with App.app_context():
+            new_user = User(
+                name=username,
+                email=user_email,
+                password=hashed_password
+            )
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('get_all_posts'))
     return render_template("register.html", form=form)
 
 
