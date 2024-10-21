@@ -36,6 +36,7 @@
                 <!--           Comments Area -->
                 <div class="col-lg-8 col-md-10 mx-auto comment">
                     {{ ckeditor.load() }}
+                    {{ ckeditor.config(name="Comment") }}
                     {{ wtf.quick_form(form, novalidate=True) }}
                     <ul class="commentList">
                         <li>

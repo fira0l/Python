@@ -1,3 +1,4 @@
+from dominate.tags import comment
 from flask import Flask, render_template, redirect, url_for, flash, abort
 from functools import wraps
 from flask_bootstrap import Bootstrap

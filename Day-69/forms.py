@@ -28,4 +28,4 @@ class LoginForm(FlaskForm):
 
 class CommentForm(FlaskForm):
     contentEditor = CKEditorField("Add Comment")
-    submit = SubmitField("Edit")
+    submit = SubmitField("Comment")
