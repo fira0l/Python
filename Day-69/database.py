@@ -24,7 +24,7 @@ Session = sessionmaker()
 @login_manager.user_loader
 def load_user(user):
     with App.app_context():
-        return User.query.get(user)
+        return db.session.query(User).get(user)
 
 
 class User(UserMixin, db.Model):
