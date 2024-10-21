@@ -4,6 +4,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from sqlalchemy.orm import sessionmaker
+
 
 App = Flask(__name__)
 
@@ -15,6 +17,8 @@ db = SQLAlchemy(App)
 
 login_manager = LoginManager()
 login_manager.init_app(App)
+
+Session = sessionmaker()
 
 
 @login_manager.user_loader

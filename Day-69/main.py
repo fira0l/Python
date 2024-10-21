@@ -21,7 +21,7 @@ def admin_only(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         #If id is not 1 then return abort with 403 error
-        if load_user != 1:
+        if current_user.id != 1:
             return abort(403)
         #Otherwise continue with the route function
         return f(*args, **kwargs)
@@ -31,7 +31,9 @@ def admin_only(f):
 @login_manager.user_loader
 def load_user(user_id):
     with App.app_context():
-        return User.query.get(int(user_id))
+        user = User.query.get(int(user_id))
+        print(user)
+        return user
 
 
 @app.route('/')
