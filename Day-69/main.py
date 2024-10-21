@@ -1,17 +1,16 @@
-
 from flask import Flask, render_template, redirect, url_for, flash, abort
 from functools import wraps
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date, datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import CreatePostForm, UserSignUpForm, LoginForm
+from forms import CreatePostForm, UserSignUpForm, LoginForm, CommentForm
 import gravatar
 from database import db, BlogPost, App, User
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6ba'
 ckeditor = CKEditor(app)
 Bootstrap(app)
 login_manager = LoginManager()
@@ -94,11 +93,12 @@ def logout():
     return redirect(url_for('get_all_posts'))
 
 
-@app.route("/post/<int:post_id>")
+@app.route("/post/<int:post_id>",methods=['GET', 'POST'])
 def show_post(post_id):
     with App.app_context():
+        comment_form = CommentForm()
         requested_post = BlogPost.query.get(post_id)
-        return render_template("post.html", post=requested_post, current_user=current_user)
+        return render_template("post.html", post=requested_post, current_user=current_user, form=comment_form)
 
 
 @app.route("/about")
