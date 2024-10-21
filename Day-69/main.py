@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, redirect, url_for, flash, abort
 from functools import wraps
 from flask_bootstrap import Bootstrap
@@ -130,7 +131,7 @@ def add_new_post():
     return render_template("make-post.html", form=form, current_user=current_user)
 
 
-@app.route("/edit-post/<int:post_id>")
+@app.route("/edit-post/<int:post_id>", methods=["GET","POST"])
 @admin_only
 def edit_post(post_id):
     with App.app_context():
@@ -139,7 +140,7 @@ def edit_post(post_id):
         title=post.title,
         subtitle=post.subtitle,
         img_url=post.img_url,
-        author=post.author.name,
+        # author=post.author_id,
         body=post.body
     )
     with App.app_context():
@@ -148,7 +149,7 @@ def edit_post(post_id):
             post.title = edit_form.title.data
             post.subtitle = edit_form.subtitle.data
             post.img_url = edit_form.img_url.data
-            post.author = edit_form.author.data
+            # post.author = edit_form.author.data
             post.body = edit_form.body.data
             db.session.commit()
             return redirect(url_for("show_post", post_id=post.id))
