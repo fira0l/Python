@@ -32,7 +32,6 @@ def admin_only(f):
 def load_user(user_id):
     with App.app_context():
         user = User.query.get(int(user_id))
-        print(user)
         return user
 
 

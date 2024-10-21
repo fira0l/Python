@@ -22,7 +22,6 @@ login_manager.init_app(App)
 @login_manager.user_loader
 def load_user(user):
     with App.app_context():
-        post = db.session.query(BlogPost).get(user.id)
         return db.session.query(User).get(user)
 
 
@@ -42,7 +41,7 @@ class BlogPost(db.Model):
     # Create Foreign Key, "users.id" the users refers to the tablename of User.
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     # Create reference to the User object, the "posts" refers to the posts protperty in the User class.
-    author = relationship("User", back_populates="posts")
+    author = relationship("User", back_populates="posts", lazy=True)
     title = db.Column(db.String(250), unique=True, nullable=False)
     subtitle = db.Column(db.String(250), nullable=False)
     date = db.Column(db.String(250), nullable=False)
