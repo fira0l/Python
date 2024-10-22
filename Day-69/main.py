@@ -1,13 +1,16 @@
-import os
+# Import For Gravator
+import hashlib
+from urllib.parse import urlencode
+from hashlib import md5
 from flask import Flask, render_template, redirect, url_for, flash, abort
 from functools import wraps
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date, datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from wtforms.validators import email
 from forms import CreatePostForm, UserSignUpForm, LoginForm, CommentForm
-import gravatar
-from database import db, BlogPost, App, User
+from database import db, BlogPost, App, User, Comment
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 
 app = Flask(__name__)
@@ -16,6 +19,11 @@ ckeditor = CKEditor(app)
 Bootstrap(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
+def gravatar_url(user_email, size=100, rating='g', default='retro', force_default=False):
+    hash_value = md5(user_email.lower().encode('utf-8')).hexdigest()
+    return f"https://www.gravatar.com/avatar/{hash_value}?s={size}&d={default}&r={rating}&f={force_default}"
 
 
 def admin_only(f):
@@ -99,6 +107,25 @@ def show_post(post_id):
     with App.app_context():
         requested_post = BlogPost.query.get(post_id)
         author = User.query.filter_by(id=requested_post.author_id).first()
+        gravatar = gravatar_url(current_user.email)
+    if comment_form.validate_on_submit():
+        if current_user.is_authenticated:
+            new_comment = comment_form.contentEditor.data
+            new_comment_author = current_user
+            new_comment_post = requested_post
+            with App.app_context():
+                new_comment_object = Comment(
+                    comment=new_comment,
+                    comment_author=new_comment_author,
+                    parent_post=new_comment_post
+                )
+                db.session.add(new_comment_object)
+                db.session.commit()
+                return redirect(url_for('show_post', post_id=post_id, gravatar=gravatar))
+        else:
+            flash("You Need to be logged-in in order to comment")
+            return redirect(url_for('login'))
+
     return render_template("post.html", post=requested_post, current_user=current_user, form=comment_form, author=author)
 
 
