@@ -32,6 +32,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     posts = relationship("BlogPost", back_populates="author")
+    comments = relationship("Comment", back_populates="comment_author")
     # children = relationship("BlogPost")
 
 
@@ -55,3 +56,14 @@ class BlogPost(db.Model):
         return 'Title <%r>' % self.title
 
 
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String(250), nullable=False)
+    author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    comment_author = relationship("User", lazy="subquery", back_populates="comments")
+    # post_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
+    # user = relationship("User", back_populates="comments")
+    # post_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
+    # user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    # post = relationship("BlogPost", back_populates="comments")
