@@ -37,7 +37,7 @@
                 {{ ckeditor.load() }}
                 {{ ckeditor.config(name="Comment") }}
                 {{ wtf.quick_form(form, novalidate=True, button_map={"submit":"primary"}) }}
-                <div class="col-lg-8 col-md-10 mx-auto comment">
+                <div class="col-lg-8 col-md-10 mx-0 comment">
                 {% for comment in post.comments : %}
                     <ul class="commentList">
                         <li>
