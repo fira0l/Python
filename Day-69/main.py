@@ -1,4 +1,4 @@
-from dominate.tags import comment
+import os
 from flask import Flask, render_template, redirect, url_for, flash, abort
 from functools import wraps
 from flask_bootstrap import Bootstrap
@@ -11,7 +11,7 @@ from database import db, BlogPost, App, User
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6ba'
+app.secret_key = "Thisismysecretkeysoenjoyit"
 ckeditor = CKEditor(app)
 Bootstrap(app)
 login_manager = LoginManager()
@@ -40,8 +40,7 @@ def load_user(user_id):
 def get_all_posts():
     with App.app_context():
         posts = BlogPost.query.all()
-        is_admin = load_user == 1
-        return render_template("index.html", all_posts=posts, current_user=current_user, is_admin=is_admin)
+        return render_template("index.html", all_posts=posts, current_user=current_user)
 
 
 @app.route('/register', methods=["GET", "POST"])
@@ -96,10 +95,10 @@ def logout():
 
 @app.route("/post/<int:post_id>",methods=['GET', 'POST'])
 def show_post(post_id):
+    comment_form = CommentForm()
     with App.app_context():
-        comment_form = CommentForm()
         requested_post = BlogPost.query.get(post_id)
-        return render_template("post.html", post=requested_post, current_user=current_user, form=comment_form)
+    return render_template("post.html", post=requested_post, current_user=current_user, form=comment_form)
 
 
 @app.route("/about")
