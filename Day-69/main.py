@@ -98,7 +98,8 @@ def show_post(post_id):
     comment_form = CommentForm()
     with App.app_context():
         requested_post = BlogPost.query.get(post_id)
-    return render_template("post.html", post=requested_post, current_user=current_user, form=comment_form)
+        author = User.query.filter_by(id=requested_post.author_id).first()
+    return render_template("post.html", post=requested_post, current_user=current_user, form=comment_form, author=author)
 
 
 @app.route("/about")
