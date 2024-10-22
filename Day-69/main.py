@@ -21,7 +21,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-def gravatar_url(user_email, size=100, rating='g', default='retro', force_default=False):
+def gravatar_url(user_email, size=200, rating='g', default='retro', force_default=False):
     hash_value = md5(user_email.lower().encode('utf-8')).hexdigest()
     return f"https://www.gravatar.com/avatar/{hash_value}?s={size}&d={default}&r={rating}&f={force_default}"
 
