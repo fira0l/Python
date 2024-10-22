@@ -49,6 +49,7 @@ class BlogPost(db.Model):
     body = db.Column(db.Text, nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
 
+    comments = relationship("Comment", back_populates="parent_post")
     # user_id = db.Column(db.Integer, ForeignKey("User.id"))
     # parent = relationship("User")
 
@@ -62,6 +63,10 @@ class Comment(db.Model):
     comment = db.Column(db.String(250), nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     comment_author = relationship("User", lazy="subquery", back_populates="comments")
+
+    post_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
+    parent_post = relationship("BlogPost", back_populates="comments")
+    text = db.Column(db.Text, nullable=False)
     # post_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
     # user = relationship("User", back_populates="comments")
     # post_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
