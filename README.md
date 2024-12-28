@@ -1,27 +1,74 @@
 
-# Python Training and Projects
 
-<video width="320" height="240" controls>
-  <source src="https://github.com/fira0l/Python/blob/main/gource_557de6c5-4d2c-4c30-9d28-8bad9b49c155.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<h1 align="center" style="font-weight: bold;">Python Training and Projects 💻</h1>
 
-Welcome to Firaol Anbessa's Python Training and Projects repository! This repository contains a collection of Python training codes and projects developed by [Firaol Anbessa](https://github.com/fira0l).
+<p align="center">
+<a href="#tech">Technologies</a>
+<a href="#started">Getting Started</a>
+<a href="#colab">Collaborators</a>
+<a href="#contribute">Contribute</a> 
+</p>
 
-## Table of Contents
 
-- [About](#about)
-- [Projects](#projects)
-- [Getting Started](#getting-started)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+<p align="center">Welcome to Firaol Anbessa's Python Training and Projects repository! This repository contains a collection of Python training codes and projects developed by Firaol Anbessa.</p>
 
-## About
 
-This repository showcases a variety of Python training exercises and projects, ranging from basic scripts to more complex applications. It's a resource for anyone looking to learn Python or find inspiration for their own projects.
+<p align="center">
+<a href="https://github.com/fira0l">📱 Visit this Project</a>
+</p>
+
+<h2 id="layout">🎨 Layout</h2>
+
+<p align="center">
+
+<img src="https://github.com/fira0l/Python/blob/main/image/maxresdefault.jpg" alt="Random Image" width="400px" height="300">
+<img src="https://github.com/fira0l/Python/blob/main/image/python.jpg" alt="Random Image" width="400px" height="300">
+</p>
+
+<h2 id="technologies">💻 Technologies</h2>
+
+- Python - Flask 
+- Selenium - Turtle
+- Pandas - Jupyter
+- Beautiful_Soup
+- Bootstrap
+
+<h2 id="started">🚀 Getting started</h2>
+
+To get started with these projects, you'll need to clone the repository and install the necessary dependencies. Follow the instructions below.
+
+## Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/fira0l/python.git
+2. **Navigate to the project directory:**
+```bash
+cd python-training-and-projects
+```
+3. **Install the dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+<h3>Prerequisites</h3>
+
+Python running on local machine that's all
+
+<h3>Cloning</h3>
+
+How to clone your project
+
+```bash
+git clone https://www.github.com/fira0l/python.git
+```
+
+## Usage
+Each project has its own directory with a README file that provides detailed instructions on how to run the code and understand the output.
+
+To run a specific project, navigate to its directory and follow the instructions in the README file.
+
+<h3>Starting</h3>
 
 ## Projects
 
@@ -64,31 +111,8 @@ Here are some of the key projects included in this repository:
      used word to teach for future it can be modified to teach multiple languages at a time
 
 
+<h2 id="contribute">📫 Contribute</h2>
 
-## Getting Started
-
-To get started with these projects, you'll need to clone the repository and install the necessary dependencies. Follow the instructions below.
-
-## Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/fira0l/python.git
-2. **Navigate to the project directory:**
-```bash
-cd python-training-and-projects
-```
-3. **Install the dependencies:**
-```bash
-pip install -r requirements.txt
-```
-## Usage
-Each project has its own directory with a README file that provides detailed instructions on how to run the code and understand the output.
-
-To run a specific project, navigate to its directory and follow the instructions in the README file.
-
-
-## Contributing
 Contributions are welcome! If you have any improvements or new projects to add, please follow these steps:
 
 - Fork the repository.
@@ -97,12 +121,8 @@ Contributions are welcome! If you have any improvements or new projects to add, 
 - Push your changes to your fork.
 - Submit a pull request with a description of your changes.
 
-## License
-This repository is licensed under the MIT License. See the LICENSE file for more details.
+<h3>Documentations that might help</h3>
 
-## Contact
-For any questions or suggestions, feel free to contact me at fira0l@github.com.
+[📝 How to create a Pull Request](https://www.atlassian.com/br/git/tutorials/making-a-pull-request)
 
-Happy coding!
-
-Firaol Anbessa
+[💾 Commit pattern](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716)
