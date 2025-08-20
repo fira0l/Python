@@ -1,0 +1,13 @@
+Algorithm RecursiveScan(directory)
+    Input: directory path
+    Output: report of detected moo files
+
+    for each item i in directory do
+        if i is a file then
+            call DetectMoo(i)
+        else if i is a subdirectory then
+            call RecursiveScan(i)
+        end if
+    end for
+End Algorithm
+

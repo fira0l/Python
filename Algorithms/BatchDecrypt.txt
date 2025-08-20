@@ -1,0 +1,10 @@
+Algorithm BatchDecrypt(file_list)
+    Input: file_list → list of encrypted file paths
+    Output: multiple decrypted files
+
+    for each file f in file_list do
+        output_file ← f + ".dec"
+        call DecryptFile(f, output_file)
+    end for
+End Algorithm
+

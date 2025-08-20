@@ -1,0 +1,23 @@
+Algorithm Defender(command, target)
+    Input: command ("scan", "decrypt", "scan+decrypt"), target path
+    Output: actions taken (moo detected/quarantined, files decrypted)
+
+    if command == "scan" then
+        call DetectMoo(target)
+
+    else if command == "decrypt" then
+        if target is a file then
+            call DecryptFile(target, target + ".dec")
+        else if target is a list of files then
+            call BatchDecrypt(target)
+        end if
+
+    else if command == "scan+decrypt" then
+        call DetectMoo(target)
+        call BatchDecrypt(all files in target that are encrypted)
+
+    else
+        print "Invalid command"
+    end if
+End Algorithm
+

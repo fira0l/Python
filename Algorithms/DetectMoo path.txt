@@ -1,0 +1,17 @@
+Algorithm DetectMoo(path)
+    Input: path → file or directory to scan
+    Output: list of detected moo files, action taken (removed/quarantined)
+
+    if path is a file then
+        file_hash ← SHA256(path)
+        if file_hash == KNOWN_MOO_HASH then
+            print "Moo detected in " + path
+            move path to quarantine_folder
+        end if
+    else if path is a directory then
+        for each file f in directory path (recursively) do
+            call DetectMoo(f)
+        end for
+    end if
+End Algorithm
+

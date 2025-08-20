@@ -1,0 +1,21 @@
+Algorithm DecryptFile(input_file, output_file)
+    Input: input_file (encrypted), output_file (decrypted)
+    Output: decrypted file
+
+    open input_file in binary mode
+    read all bytes into buffer
+
+    decrypted_buffer ← empty list
+
+    for each byte b in buffer do
+        temp ← b XOR 0xFF
+        original ← (temp - 0x04) mod 256
+        append original to decrypted_buffer
+    end for
+
+    open output_file in binary write mode
+    write decrypted_buffer to output_file
+
+    print "Decryption complete → " + output_file
+End Algorithm
+
